@@ -13,6 +13,7 @@ use tauri::Manager;
 pub struct AppState {
     pub db: sqlx::SqlitePool,
     pub device_id: String,
+    pub journal_key: std::sync::Mutex<Option<[u8; 32]>>,
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -31,7 +32,11 @@ pub fn run() {
                 .expect("failed to get device id");
 
             let pool_for_scheduler = pool.clone();
-            app.manage(AppState { db: pool, device_id });
+            app.manage(AppState {
+                db: pool,
+                device_id,
+                journal_key: std::sync::Mutex::new(None),
+            });
             tauri::async_runtime::spawn(lock_scheduler::run(pool_for_scheduler));
 
             let sync_port = 47832u16;
