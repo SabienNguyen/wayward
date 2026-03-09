@@ -2,6 +2,7 @@ mod commands;
 mod db;
 mod tasks;
 mod journal;
+mod goals;
 
 use std::path::PathBuf;
 use tauri::Manager;
@@ -40,6 +41,8 @@ pub fn run() {
             commands::journal::cmd_create_journal_entry,
             commands::journal::cmd_list_journal_entries,
             commands::journal::cmd_update_journal_entry,
+            commands::goals::cmd_create_goal,
+            commands::goals::cmd_list_goals,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
