@@ -4,6 +4,7 @@ mod tasks;
 mod journal;
 mod goals;
 mod lock_scheduler;
+mod sync;
 
 use std::path::PathBuf;
 use tauri::Manager;
