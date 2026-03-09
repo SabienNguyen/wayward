@@ -1,6 +1,7 @@
 mod commands;
 mod db;
 mod tasks;
+mod journal;
 
 use std::path::PathBuf;
 use tauri::Manager;
