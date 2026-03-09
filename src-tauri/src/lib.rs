@@ -3,6 +3,7 @@ mod db;
 mod tasks;
 mod journal;
 mod goals;
+mod lock_scheduler;
 
 use std::path::PathBuf;
 use tauri::Manager;
@@ -27,9 +28,9 @@ pub fn run() {
             let device_id = tauri::async_runtime::block_on(get_or_create_device_id(&pool))
                 .expect("failed to get device id");
 
-            let pool_clone = pool.clone();
+            let pool_for_scheduler = pool.clone();
             app.manage(AppState { db: pool, device_id });
-            let _ = pool_clone; // will be used by sync scheduler in a later task
+            tauri::async_runtime::spawn(lock_scheduler::run(pool_for_scheduler));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
