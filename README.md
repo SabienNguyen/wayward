@@ -1,21 +1,69 @@
-# Temp Name
+# Wayward
 
-## What I Want to Make
+A productivity app built around the Eisenhower Matrix. Two modes: **Do** for tasks, **Journal** for thoughts. No due dates, no overdue guilt — just clarity on what matters.
 
-I want to make a central hub where people can achieve their purpose and finish the things they are working on. I think there are some great tools out there, but there are some fundamental issues with some of them. Todoist was the first tool that I used, but I realized that its inherent design made it easy to overload oneself with a ton of tasks. I spent more time creating roadmaps for my projects and goals than actually working on them. Next, I tried Notion, but it was too cumbersome to actually get started. It has a beautiful interface, but for someone who isn't very great at designing, I spent more time looking at different layouts and color schemes than actually getting started on the things I wanted to achieve. Finally, Obsidian was another tool that I tried, and there wasn't a real issue with the tool itself, but I actually feel like for small notes or thoughts it wasn't really a great tool.
+## Modes
 
-## How I Want It to Work
+- **Do** — Q1 (urgent & important) and Q2 (what matters). Q2 tasks have no deadlines; the app keeps them visible so you work on them when you're ready.
+- **Journal** — Write entries throughout the day. Entries lock at midnight and can't be edited after.
+- **Goals** — Up to 3 goals, locked for one year from creation.
 
-This combines a couple of ideas. I want a tool that helps to effectively finish different types of tasks (based on the Eisenhower Matrix). To-do lists are great for completing tasks that are urgent and important. Urgent tasks (in my opinion) will take care of themselves. However, there is a fundamental issue with how we approach tasks that are not urgent but important. The truth is that there is no tool that can effectively make completing these tasks easier. Furthermore, people often group important tasks with tasks that they want to do — this includes tasks for hobbies they want to start, subjects they want to learn, or people they want to deepen a relationship with. Now, this does not mean that these tasks can't be important, but the reality is that you will never be able to complete all of the tasks you want to do because of how finite life is.
+## Installation
 
-- This tool helps people figure out what's important to them
-- This tool helps people complete Quadrant 1 tasks
-- This tool helps people manage Quadrant 2 tasks
+### Desktop (pre-built)
 
-## What the End Flow Will Look Like
+Download the latest release for your platform from the [Releases](../../releases) page:
+- **Linux** — `.deb` (Debian/Ubuntu) or `.rpm` (Fedora/Arch)
+- **macOS** — `.dmg`
+- **Windows** — `.msi`
 
-- We have an application with two modes: a Do mode and a Journal mode
-- Do mode is a more typical to-do list with a backlog of tasks and a list of items to do — still debating whether there should be 3 lists or 2 lists; if 3 lists, then Quadrant 1 and 2 tasks are separated
-- Journal mode
-  - This mode allows people to list ideas, thoughts, and notes. Entries will be separated by date, and you will not be able to edit a date entry after 11:59 PM each day
-- Define goals that are locked for a year, max 3 goals at a time (this may be removed)
+### Build from source
+
+**Prerequisites:**
+- [Rust](https://rustup.rs/) (stable)
+- [Node.js](https://nodejs.org/) 18+
+- Linux only: `webkit2gtk-4.1` — install via your package manager:
+  ```bash
+  # Arch
+  sudo pacman -S webkit2gtk-4.1
+
+  # Ubuntu/Debian
+  sudo apt install libwebkit2gtk-4.1-dev
+  ```
+
+**Build:**
+```bash
+git clone https://github.com/SabienNguyen/wayward
+cd wayward
+npm install
+npm run tauri build
+```
+
+The output binary and installers are in `src-tauri/target/release/bundle/`.
+
+### Mobile
+
+**Android** (requires [Android Studio](https://developer.android.com/studio) + NDK):
+```bash
+npm run tauri android init
+npm run tauri android dev
+```
+
+**iOS** (macOS only, requires Xcode):
+```bash
+npm run tauri ios init
+npm run tauri ios dev
+```
+
+## Development
+
+```bash
+npm install
+npm run tauri dev        # Start with live reload
+cd src-tauri && cargo test   # Run Rust tests (no window needed)
+npm run check            # TypeScript type check
+```
+
+## Sync
+
+Devices sync automatically over LAN — no account or internet required. Open the app on two devices on the same network and they'll find each other via mDNS and exchange changes directly.
