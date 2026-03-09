@@ -7,17 +7,30 @@
   onMount(loadTasks);
 </script>
 
-<main>
-  <section>
-    <h2>Urgent & Important</h2>
+<div class="do-page">
+  <section class="task-section">
+    <h2 class="section-heading">Urgent & Important</h2>
     <AddTaskForm quadrant={1} />
     <TaskList tasks={$q1Tasks} />
   </section>
 
-  <section>
-    <h2>What Matters</h2>
-    <p>These take the time they need.</p>
+  <section class="task-section">
+    <h2 class="section-heading">What Matters</h2>
     <AddTaskForm quadrant={2} />
     <TaskList tasks={$q2Tasks} />
   </section>
-</main>
+</div>
+
+<style>
+  .do-page {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding-top: 16px;
+  }
+
+  .task-section {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

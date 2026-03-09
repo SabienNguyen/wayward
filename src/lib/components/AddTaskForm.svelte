@@ -11,7 +11,21 @@
   }
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
-  <input bind:value={name} placeholder="Add task..." />
-  <button type="submit">Add</button>
+<form class="add-task-form" on:submit|preventDefault={handleSubmit}>
+  <input class="task-input" bind:value={name} placeholder="Add task..." />
+  <button type="submit" class="btn-primary">Add</button>
 </form>
+
+<style>
+  .add-task-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .task-input {
+    flex: 1;
+    padding: 7px 12px;
+    border-radius: var(--radius-sm);
+  }
+</style>
