@@ -32,6 +32,22 @@ pub fn run() {
             let pool_for_scheduler = pool.clone();
             app.manage(AppState { db: pool, device_id });
             tauri::async_runtime::spawn(lock_scheduler::run(pool_for_scheduler));
+
+            let sync_port = 47832u16;
+            let pool_sync = app.state::<AppState>().db.clone();
+            let device_id_sync = app.state::<AppState>().device_id.clone();
+
+            tauri::async_runtime::spawn(sync::server::run(
+                pool_sync.clone(),
+                device_id_sync.clone(),
+                sync_port,
+            ));
+            sync::discovery::broadcast(device_id_sync.clone(), sync_port);
+            tauri::async_runtime::spawn(sync::discovery::discover_and_sync(
+                pool_sync,
+                device_id_sync,
+            ));
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
