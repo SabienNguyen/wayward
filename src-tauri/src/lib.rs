@@ -1,4 +1,5 @@
 mod db;
+mod tasks;
 
 use std::path::PathBuf;
 use tauri::Manager;
