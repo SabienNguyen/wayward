@@ -88,6 +88,10 @@ pub async fn setup_password(
     password: &str,
     pin: &str,
 ) -> Result<[u8; 32], String> {
+    if get_config(pool, "journal_lock_enabled").await?.as_deref() == Some("true") {
+        return Err("journal lock already configured".to_string());
+    }
+
     let mut salt_password = [0u8; 16];
     let mut salt_pin = [0u8; 16];
     rand::thread_rng().fill_bytes(&mut salt_password);
@@ -208,6 +212,14 @@ mod tests {
         let pool = test_pool().await;
         setup_password(&pool, "password", "1234").await.unwrap();
         let result = recover_with_pin(&pool, "9999", "newpassword").await;
+        assert!(result.is_err());
+    }
+
+    #[tokio::test]
+    async fn test_setup_password_cannot_be_called_twice() {
+        let pool = test_pool().await;
+        setup_password(&pool, "password", "1234").await.unwrap();
+        let result = setup_password(&pool, "password2", "5678").await;
         assert!(result.is_err());
     }
 
