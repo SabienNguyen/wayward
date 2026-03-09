@@ -48,8 +48,12 @@ pub async fn run(pool: SqlitePool, device_id: String, port: u16) {
             };
 
             let len_bytes = (payload.len() as u32).to_be_bytes();
-            let _ = stream.write_all(&len_bytes).await;
-            let _ = stream.write_all(&payload).await;
+            if stream.write_all(&len_bytes).await.is_err() {
+                return;
+            }
+            if stream.write_all(&payload).await.is_err() {
+                return;
+            }
 
             let _ = peer::update_last_synced(&pool, &peer_id).await;
         });
