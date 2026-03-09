@@ -1,3 +1,4 @@
+mod commands;
 mod db;
 mod tasks;
 
@@ -29,7 +30,13 @@ pub fn run() {
             let _ = pool_clone; // will be used by sync scheduler in a later task
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![])
+        .invoke_handler(tauri::generate_handler![
+            commands::tasks::cmd_create_task,
+            commands::tasks::cmd_list_tasks,
+            commands::tasks::cmd_complete_task,
+            commands::tasks::cmd_delete_task,
+            commands::tasks::cmd_update_task_positions,
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
