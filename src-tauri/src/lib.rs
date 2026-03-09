@@ -37,6 +37,9 @@ pub fn run() {
             commands::tasks::cmd_complete_task,
             commands::tasks::cmd_delete_task,
             commands::tasks::cmd_update_task_positions,
+            commands::journal::cmd_create_journal_entry,
+            commands::journal::cmd_list_journal_entries,
+            commands::journal::cmd_update_journal_entry,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

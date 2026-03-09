@@ -39,7 +39,7 @@ pub async fn create_entry(
 }
 
 pub async fn get_entry(pool: &SqlitePool, id: &str) -> Result<JournalEntry, sqlx::Error> {
-    sqlx::query_as::<_, JournalEntry>("SELECT * FROM journal_entries WHERE id = ?")
+    sqlx::query_as::<_, JournalEntry>("SELECT * FROM journal_entries WHERE id = ? AND deleted_at IS NULL")
         .bind(id)
         .fetch_one(pool)
         .await
@@ -63,13 +63,17 @@ pub async fn update_entry(
     content: &str,
 ) -> Result<(), sqlx::Error> {
     let now = chrono::Utc::now().timestamp_millis();
-    let locked: bool = sqlx::query_scalar("SELECT locked FROM journal_entries WHERE id = ?")
-        .bind(id)
-        .fetch_one(pool)
-        .await?;
+    let locked: Option<bool> = sqlx::query_scalar(
+        "SELECT locked FROM journal_entries WHERE id = ? AND deleted_at IS NULL"
+    )
+    .bind(id)
+    .fetch_optional(pool)
+    .await?;
 
-    if locked {
-        return Err(sqlx::Error::RowNotFound);
+    match locked {
+        None => return Err(sqlx::Error::RowNotFound),
+        Some(true) => return Err(sqlx::Error::RowNotFound),
+        Some(false) => {}
     }
 
     sqlx::query("UPDATE journal_entries SET content = ?, updated_at = ? WHERE id = ?")
