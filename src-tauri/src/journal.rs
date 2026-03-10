@@ -120,6 +120,14 @@ pub async fn update_entry(
     Ok(())
 }
 
+pub async fn list_dates(pool: &SqlitePool) -> Result<Vec<String>, sqlx::Error> {
+    sqlx::query_scalar::<_, String>(
+        "SELECT DISTINCT date FROM journal_entries WHERE deleted_at IS NULL ORDER BY date DESC",
+    )
+    .fetch_all(pool)
+    .await
+}
+
 /// Called by background task at midnight — locks all entries from the given date
 pub async fn lock_entries_for_date(pool: &SqlitePool, date: &str) -> Result<(), sqlx::Error> {
     let now = chrono::Utc::now().timestamp_millis();
@@ -197,5 +205,16 @@ mod tests {
         let today = chrono::Utc::now().format("%Y-%m-%d").to_string();
         let entries = list_entries_for_date(&pool, &today, Some(&key)).await.unwrap();
         assert_eq!(entries[0].content, "Entry one");
+    }
+
+    #[tokio::test]
+    async fn test_list_dates_returns_distinct_dates() {
+        let pool = test_pool().await;
+        let today = chrono::Utc::now().format("%Y-%m-%d").to_string();
+        create_entry(&pool, "First", "device-a", None).await.unwrap();
+        create_entry(&pool, "Second", "device-a", None).await.unwrap();
+        let dates = list_dates(&pool).await.unwrap();
+        assert_eq!(dates.len(), 1);
+        assert_eq!(dates[0], today);
     }
 }
