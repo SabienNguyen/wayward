@@ -2,7 +2,7 @@ use crate::{crypto, journal, AppState};
 use tauri::State;
 
 fn get_key(state: &AppState) -> Option<[u8; 32]> {
-    *state.journal_key.lock().unwrap()
+    *state.journal_key.lock().unwrap_or_else(|p| p.into_inner())
 }
 
 #[tauri::command]
@@ -57,7 +57,7 @@ pub async fn cmd_setup_journal_password(
     pin: String,
 ) -> Result<(), String> {
     let key = crypto::setup_password(&state.db, &password, &pin).await?;
-    *state.journal_key.lock().unwrap() = Some(key);
+    *state.journal_key.lock().unwrap_or_else(|p| p.into_inner()) = Some(key);
     Ok(())
 }
 
@@ -68,7 +68,7 @@ pub async fn cmd_unlock_journal(
 ) -> Result<bool, String> {
     match crypto::verify_and_get_key(&state.db, &password).await {
         Ok(key) => {
-            *state.journal_key.lock().unwrap() = Some(key);
+            *state.journal_key.lock().unwrap_or_else(|p| p.into_inner()) = Some(key);
             Ok(true)
         }
         Err(_) => Ok(false),
@@ -77,7 +77,7 @@ pub async fn cmd_unlock_journal(
 
 #[tauri::command]
 pub async fn cmd_lock_journal(state: State<'_, AppState>) -> Result<(), String> {
-    *state.journal_key.lock().unwrap() = None;
+    *state.journal_key.lock().unwrap_or_else(|p| p.into_inner()) = None;
     Ok(())
 }
 
@@ -89,7 +89,7 @@ pub async fn cmd_recover_journal(
 ) -> Result<bool, String> {
     match crypto::recover_with_pin(&state.db, &pin, &new_password).await {
         Ok(key) => {
-            *state.journal_key.lock().unwrap() = Some(key);
+            *state.journal_key.lock().unwrap_or_else(|p| p.into_inner()) = Some(key);
             Ok(true)
         }
         Err(_) => Ok(false),
