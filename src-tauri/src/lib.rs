@@ -65,6 +65,11 @@ pub fn run() {
             commands::journal::cmd_create_journal_entry,
             commands::journal::cmd_list_journal_entries,
             commands::journal::cmd_update_journal_entry,
+            commands::journal::cmd_is_journal_locked,
+            commands::journal::cmd_setup_journal_password,
+            commands::journal::cmd_unlock_journal,
+            commands::journal::cmd_lock_journal,
+            commands::journal::cmd_recover_journal,
             commands::goals::cmd_create_goal,
             commands::goals::cmd_list_goals,
         ])
