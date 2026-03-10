@@ -39,23 +39,54 @@
     await lockJournal();
   });
 
-  // TODO(human): Implement handleSetup, handleUnlock, and handleRecover below.
-  //
-  // handleSetup(e: SubmitEvent): called when the setup form is submitted.
-  //   - Validate: setupPassword must equal setupConfirm, setupPin must be numeric (/^\d+$/)
-  //   - Call setupJournalPassword(setupPassword, setupPin)
-  //   - On success: set view = 'unlocked', call loadEntriesForDate(today)
-  //   - On error: set setupError to a user-friendly message
-  //
-  // handleUnlock(e: SubmitEvent): called when the unlock form is submitted.
-  //   - Call unlockJournal(unlockPassword)
-  //   - If true: set view = 'unlocked', call loadEntriesForDate(today)
-  //   - If false: set unlockError = 'Incorrect password'
-  //
-  // handleRecover(e: SubmitEvent): called when the recover form is submitted.
-  //   - Call recoverJournal(recoverPin, recoverNewPassword)
-  //   - If true: set view = 'unlocked', call loadEntriesForDate(today)
-  //   - If false: set recoverError = 'Incorrect PIN'
+  async function handleSetup() {
+    setupError = '';
+    if (setupPassword !== setupConfirm) {
+      setupError = 'Passwords do not match';
+      return;
+    }
+    if (!/^\d+$/.test(setupPin)) {
+      setupError = 'PIN must be numbers only';
+      return;
+    }
+    try {
+      await setupJournalPassword(setupPassword, setupPin);
+      view = 'unlocked';
+      await loadEntriesForDate(today);
+    } catch (e) {
+      setupError = 'Failed to set up lock. Try again.';
+    }
+  }
+
+  async function handleUnlock() {
+    unlockError = '';
+    try {
+      const ok = await unlockJournal(unlockPassword);
+      if (ok) {
+        view = 'unlocked';
+        await loadEntriesForDate(today);
+      } else {
+        unlockError = 'Incorrect password';
+      }
+    } catch (e) {
+      unlockError = 'Something went wrong. Try again.';
+    }
+  }
+
+  async function handleRecover() {
+    recoverError = '';
+    try {
+      const ok = await recoverJournal(recoverPin, recoverNewPassword);
+      if (ok) {
+        view = 'unlocked';
+        await loadEntriesForDate(today);
+      } else {
+        recoverError = 'Incorrect PIN';
+      }
+    } catch (e) {
+      recoverError = 'Something went wrong. Try again.';
+    }
+  }
 </script>
 
 {#if view === 'loading'}
