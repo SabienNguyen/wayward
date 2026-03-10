@@ -71,7 +71,10 @@ pub async fn cmd_unlock_journal(
             *state.journal_key.lock().unwrap_or_else(|p| p.into_inner()) = Some(key);
             Ok(true)
         }
-        Err(_) => Ok(false),
+        Err(e) => {
+            eprintln!("[journal] unlock failed: {e}");
+            Ok(false)
+        }
     }
 }
 
@@ -92,6 +95,18 @@ pub async fn cmd_recover_journal(
             *state.journal_key.lock().unwrap_or_else(|p| p.into_inner()) = Some(key);
             Ok(true)
         }
-        Err(_) => Ok(false),
+        Err(e) => {
+            eprintln!("[journal] recovery failed: {e}");
+            Ok(false)
+        }
     }
+}
+
+#[tauri::command]
+pub async fn cmd_list_journal_dates(
+    state: State<'_, AppState>,
+) -> Result<Vec<String>, String> {
+    journal::list_dates(&state.db)
+        .await
+        .map_err(|e| e.to_string())
 }
