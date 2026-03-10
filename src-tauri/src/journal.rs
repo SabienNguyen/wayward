@@ -120,14 +120,6 @@ pub async fn update_entry(
     Ok(())
 }
 
-pub async fn list_dates(pool: &SqlitePool) -> Result<Vec<String>, sqlx::Error> {
-    sqlx::query_scalar::<_, String>(
-        "SELECT DISTINCT date FROM journal_entries WHERE deleted_at IS NULL ORDER BY date DESC",
-    )
-    .fetch_all(pool)
-    .await
-}
-
 /// Called by background task at midnight — locks all entries from the given date
 pub async fn lock_entries_for_date(pool: &SqlitePool, date: &str) -> Result<(), sqlx::Error> {
     let now = chrono::Utc::now().timestamp_millis();
@@ -137,6 +129,14 @@ pub async fn lock_entries_for_date(pool: &SqlitePool, date: &str) -> Result<(), 
         .execute(pool)
         .await?;
     Ok(())
+}
+
+pub async fn list_dates(pool: &SqlitePool) -> Result<Vec<String>, sqlx::Error> {
+    sqlx::query_scalar::<_, String>(
+        "SELECT DISTINCT date FROM journal_entries WHERE deleted_at IS NULL ORDER BY date DESC",
+    )
+    .fetch_all(pool)
+    .await
 }
 
 #[cfg(test)]
