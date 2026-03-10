@@ -40,5 +40,9 @@ export async function lockJournal(): Promise<void> {
 }
 
 export async function recoverJournal(pin: string, newPassword: string): Promise<boolean> {
-  return invoke<boolean>('cmd_recover_journal', { pin, new_password: newPassword });
+  return invoke<boolean>('cmd_recover_journal', { pin, newPassword });
+}
+
+export async function listJournalDates(): Promise<string[]> {
+  return invoke<string[]>('cmd_list_journal_dates');
 }
