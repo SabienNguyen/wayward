@@ -217,4 +217,50 @@ mod tests {
         assert_eq!(dates.len(), 1);
         assert_eq!(dates[0], today);
     }
+
+    #[tokio::test]
+    async fn test_list_dates_ordered_newest_first() {
+        let pool = test_pool().await;
+        // Insert an entry for an older date by directly writing to the DB
+        sqlx::query(
+            "INSERT INTO journal_entries (id, content, date, created_at, device_id, updated_at, locked) VALUES (?, ?, ?, ?, ?, ?, 0)"
+        )
+        .bind("older-id")
+        .bind("old entry")
+        .bind("2020-01-01")
+        .bind(0i64)
+        .bind("device-a")
+        .bind(0i64)
+        .execute(&pool)
+        .await
+        .unwrap();
+
+        create_entry(&pool, "Today's entry", "device-a", None).await.unwrap();
+
+        let dates = list_dates(&pool).await.unwrap();
+        assert_eq!(dates.len(), 2);
+        assert!(dates[0] > dates[1], "dates should be newest first");
+    }
+
+    #[tokio::test]
+    async fn test_list_dates_excludes_deleted_entries() {
+        let pool = test_pool().await;
+        // Insert a deleted entry
+        sqlx::query(
+            "INSERT INTO journal_entries (id, content, date, created_at, device_id, updated_at, locked, deleted_at) VALUES (?, ?, ?, ?, ?, ?, 0, ?)"
+        )
+        .bind("deleted-id")
+        .bind("gone")
+        .bind("2020-06-15")
+        .bind(0i64)
+        .bind("device-a")
+        .bind(0i64)
+        .bind(1i64)
+        .execute(&pool)
+        .await
+        .unwrap();
+
+        let dates = list_dates(&pool).await.unwrap();
+        assert!(dates.is_empty(), "deleted entries' dates should not appear");
+    }
 }
