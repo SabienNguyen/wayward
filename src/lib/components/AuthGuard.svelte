@@ -6,16 +6,16 @@
   let { children }: { children: Snippet } = $props();
 
   $effect(() => {
-    if (!authStore.loading && !authStore.user) {
-      goto('/login');
-    }
+    if (!authStore.loading && !authStore.user) goto('/login');
   });
 </script>
 
 {#if authStore.user}
   {@render children()}
 {:else if authStore.loading}
-  <div class="flex items-center justify-center h-full">
-    <span class="loading loading-spinner loading-md text-base-content/30"></span>
+  <div class="flex items-center justify-center min-h-[40vh]">
+    <span class="font-['Crimson_Pro'] italic text-sm text-base-content/25 tracking-widest">
+      loading...
+    </span>
   </div>
 {/if}

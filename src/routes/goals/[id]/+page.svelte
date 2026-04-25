@@ -56,35 +56,65 @@
 
 <AuthGuard>
   {#if goal}
-    <div class="flex flex-col gap-5 pt-4">
+    <div class="flex flex-col gap-10 pt-2 animate-fade-up">
+
+      <!-- Nav bar -->
       <div class="flex items-center justify-between">
-        <button class="btn btn-ghost btn-sm px-0 text-base-content/40" onclick={() => goto('/goals')}>← Goals</button>
-        <button class="btn btn-ghost btn-sm text-error" onclick={handleDelete}>Delete</button>
+        <button
+          onclick={() => goto('/goals')}
+          class="font-['Crimson_Pro'] text-xs tracking-widest uppercase text-base-content/25
+                 hover:text-base-content/60 transition-colors"
+        >
+          ← goals
+        </button>
+        <button
+          onclick={handleDelete}
+          class="font-['Crimson_Pro'] text-xs tracking-widest uppercase text-base-content/20
+                 hover:text-error/60 transition-colors"
+        >
+          delete
+        </button>
       </div>
 
-      <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-xl font-bold">{goal.name}</h2>
-        <div class="badge badge-outline badge-sm {goal.orientation === 'performance' ? 'badge-warning' : ''}">
+      <!-- Chapter heading -->
+      <div class="animate-fade-up-delay-1">
+        <p class="font-['Crimson_Pro'] text-xs tracking-[0.15em] uppercase text-primary/60 mb-3">
           {goal.orientation}
-        </div>
+        </p>
+        <h1 class="font-['Cormorant'] text-5xl font-light leading-[1.1] text-base-content">
+          {goal.name}
+        </h1>
+        {#if goal.description}
+          <p class="font-['Crimson_Pro'] italic text-base text-base-content/45 mt-4 leading-relaxed">
+            {goal.description}
+          </p>
+        {/if}
+        {#if goal.motivation}
+          <p class="font-['Crimson_Pro'] text-sm text-base-content/35 mt-2 leading-relaxed">
+            <span class="italic">Why:</span> {goal.motivation}
+          </p>
+        {/if}
       </div>
 
-      {#if goal.description}
-        <p class="text-sm text-base-content/60 leading-relaxed">{goal.description}</p>
-      {/if}
+      <!-- Divider -->
+      <div class="border-t border-base-content/10 animate-fade-up-delay-2"></div>
 
-      {#if goal.motivation}
-        <p class="text-sm text-base-content/50 italic">Why: {goal.motivation}</p>
-      {/if}
+      <!-- Milestones -->
+      <div class="animate-fade-up-delay-2">
+        <MilestoneList {milestones} onadd={handleAddMilestone} ontoggle={handleToggleMilestone} />
+      </div>
 
-      <div class="divider my-0"></div>
+      <!-- Session log -->
+      <div class="animate-fade-up-delay-3">
+        <SessionLog {sessions} orientation={goal.orientation} onadd={handleAddSession} />
+      </div>
 
-      <MilestoneList {milestones} onadd={handleAddMilestone} ontoggle={handleToggleMilestone} />
-      <SessionLog {sessions} orientation={goal.orientation} onadd={handleAddSession} />
     </div>
   {:else}
-    <div class="flex items-center justify-center h-full">
-      <span class="loading loading-spinner loading-md text-base-content/30"></span>
+    <div class="flex items-center justify-center min-h-[40vh]">
+      <span class="font-['Crimson_Pro'] italic text-sm text-base-content/25 tracking-widest">
+        loading...
+      </span>
     </div>
   {/if}
 </AuthGuard>

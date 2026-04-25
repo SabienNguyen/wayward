@@ -18,27 +18,31 @@
       goto('/goals');
     } catch (e) {
       console.error('Goal save failed:', e);
-      error = e instanceof Error ? e.message : 'Failed to save goal. Try again.';
+      error = e instanceof Error ? e.message : 'Failed to save. Try again.';
       saving = false;
     }
   }
 </script>
 
 <AuthGuard>
-  <div class="flex flex-col gap-6 pt-4">
-    <div class="flex items-center gap-3">
-      <button class="btn btn-ghost btn-sm px-0 text-base-content/40" onclick={() => goto('/goals')}>← Back</button>
-      <span class="text-xs font-bold uppercase tracking-widest text-base-content/40">New Goal</span>
+  <div class="flex flex-col gap-8 pt-2 animate-fade-up">
+    <div class="flex items-baseline gap-4">
+      <button
+        onclick={() => goto('/goals')}
+        class="font-['Crimson_Pro'] text-xs tracking-widest uppercase text-base-content/25
+               hover:text-base-content/60 transition-colors"
+      >
+        ← back
+      </button>
+      <h2 class="font-['Cormorant'] text-3xl font-light text-base-content/80">New Goal</h2>
     </div>
 
     {#if error}
-      <div class="alert alert-error text-sm">{error}</div>
+      <p class="font-['Crimson_Pro'] italic text-error/70 text-sm">{error}</p>
     {/if}
 
     {#if saving}
-      <div class="flex items-center gap-2 text-sm text-base-content/40">
-        <span class="loading loading-spinner loading-sm"></span> Saving...
-      </div>
+      <p class="font-['Crimson_Pro'] italic text-base-content/30 text-sm tracking-widest">saving...</p>
     {:else}
       <GoalForm onsubmit={handleSubmit} />
     {/if}

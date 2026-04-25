@@ -10,20 +10,23 @@
 </script>
 
 <div class="flex flex-col h-full">
-  <div class="navbar bg-base-100 border-b border-base-300 shadow-sm min-h-12 px-4">
-    <div class="navbar-start">
-      <span class="font-bold text-base tracking-tight">◆ Wayward</span>
-    </div>
-    <div class="navbar-end gap-1">
-      {#if authStore.user}
-        <button class="btn btn-ghost btn-sm text-base-content/50" onclick={() => authStore.signOut()}>
-          Sign out
-        </button>
-      {/if}
-    </div>
-  </div>
+  <header class="flex items-center justify-between px-6 py-4 border-b border-base-300/40">
+    <span class="font-['Cormorant'] text-xl font-light tracking-[0.15em] text-base-content/70 uppercase">
+      Wayward
+    </span>
+    {#if authStore.user}
+      <button
+        class="font-['Crimson_Pro'] text-sm text-base-content/30 hover:text-base-content/60 transition-colors tracking-wide"
+        onclick={() => authStore.signOut()}
+      >
+        sign out
+      </button>
+    {/if}
+  </header>
 
-  <main class="flex-1 overflow-y-auto py-5 px-4 max-w-2xl w-full mx-auto">
-    {@render children()}
+  <main class="flex-1 overflow-y-auto">
+    <div class="max-w-xl w-full mx-auto px-6 py-8">
+      {@render children()}
+    </div>
   </main>
 </div>

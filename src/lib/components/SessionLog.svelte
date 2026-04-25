@@ -22,30 +22,85 @@
   }
 </script>
 
-<section class="flex flex-col gap-3">
-  <span class="text-xs font-bold uppercase tracking-widest text-base-content/40">Session Log</span>
+<section class="flex flex-col gap-6">
+  <span class="section-label">Session Log</span>
 
-  <form class="flex flex-col border border-base-300 rounded-lg overflow-hidden bg-base-100"
-    onsubmit={(e) => { e.preventDefault(); handleAdd(); }}>
-    <textarea class="textarea border-none rounded-none resize-none bg-base-100 focus:outline-none"
-      bind:value={content} {placeholder} rows="3"></textarea>
-    <div class="flex justify-end p-2 border-t border-base-300 bg-base-200">
-      <button type="submit" class="btn btn-primary btn-sm">Log Session</button>
+  <form class="flex flex-col gap-3" onsubmit={(e) => { e.preventDefault(); handleAdd(); }}>
+    <textarea
+      class="lined-textarea"
+      bind:value={content}
+      {placeholder}
+      rows="4"
+    ></textarea>
+    <div class="flex justify-end">
+      <button type="submit"
+        class="font-['Crimson_Pro'] text-xs tracking-widest uppercase text-base-content/35
+               border border-base-content/15 px-5 py-2
+               hover:border-base-content/40 hover:text-base-content/70
+               transition-all duration-200">
+        record
+      </button>
     </div>
   </form>
 
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-5">
     {#each sessions as s (s.id)}
-      <div class="card card-compact bg-base-100 border border-base-300 shadow-sm">
-        <div class="card-body gap-1">
-          <time class="text-xs text-base-content/40 tabular-nums">
-            {new Date(s.logged_at).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
-          </time>
-          <p class="text-sm leading-relaxed whitespace-pre-wrap">{s.content}</p>
-        </div>
+      <div class="session-entry animate-fade-up">
+        <time class="font-['Crimson_Pro'] text-xs tracking-widest uppercase text-base-content/25 block mb-2">
+          {new Date(s.logged_at).toLocaleDateString([], { month: 'long', day: 'numeric', year: 'numeric' })}
+        </time>
+        <p class="font-['Courier_Prime'] text-sm leading-7 text-base-content/70 whitespace-pre-wrap">
+          {s.content}
+        </p>
       </div>
     {:else}
-      <p class="text-sm text-base-content/40">No sessions logged yet.</p>
+      <p class="font-['Crimson_Pro'] italic text-sm text-base-content/25">
+        No sessions recorded yet.
+      </p>
     {/each}
   </div>
 </section>
+
+<style>
+  .section-label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(var(--bc) / 0.35);
+  }
+
+  .lined-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 14px;
+    color: oklch(var(--bc) / 0.75);
+    line-height: 28px;
+    padding: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 27px,
+      oklch(var(--bc) / 0.08) 27px,
+      oklch(var(--bc) / 0.08) 28px
+    );
+  }
+
+  .lined-textarea::placeholder {
+    color: oklch(var(--bc) / 0.2);
+    font-style: italic;
+  }
+
+  .session-entry {
+    padding-bottom: 20px;
+    border-bottom: 1px solid oklch(var(--bc) / 0.08);
+  }
+
+  .session-entry:last-child {
+    border-bottom: none;
+  }
+</style>

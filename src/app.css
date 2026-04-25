@@ -3,6 +3,23 @@
   themes: coffee --default;
 }
 
+/* ── Typography System ─────────────────────────── */
+
+body {
+  font-family: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* ── Base ──────────────────────────────────────── */
+
 html, body, #svelte {
   height: 100%;
 }
@@ -12,7 +29,45 @@ html, body, #svelte {
   flex-direction: column;
 }
 
-::-webkit-scrollbar { width: 6px; }
+/* ── Grain Texture ─────────────────────────────── */
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ── Scrollbar ─────────────────────────────────── */
+
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: oklch(var(--b3)); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: oklch(var(--b3)); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: oklch(var(--bc) / 0.3); }
+
+/* ── Inputs & Textareas ────────────────────────── */
+
+input, textarea {
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 16px;
+}
+
+/* ── Animations ────────────────────────────────── */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.4s ease both;
+}
+
+.animate-fade-up-delay-1 { animation: fade-up 0.4s 0.08s ease both; }
+.animate-fade-up-delay-2 { animation: fade-up 0.4s 0.16s ease both; }
+.animate-fade-up-delay-3 { animation: fade-up 0.4s 0.24s ease both; }

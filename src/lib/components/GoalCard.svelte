@@ -4,24 +4,25 @@
   let { goal, onclick }: { goal: Goal; onclick: () => void } = $props();
 </script>
 
-<div
-  class="card card-compact bg-base-100 border border-base-300 shadow-sm cursor-pointer
-         hover:shadow-md hover:border-base-content/30 transition-all duration-150"
-  role="button"
-  tabindex="0"
+<button
+  class="w-full text-left py-5 border-b border-base-content/10 group transition-all duration-200
+         hover:border-base-content/25 focus:outline-none"
   {onclick}
-  onkeydown={(e) => e.key === 'Enter' && onclick()}
 >
-  <div class="card-body gap-2">
-    <div class="flex items-center justify-between gap-3">
-      <span class="font-semibold text-sm">{goal.name}</span>
-      <div class="badge badge-outline badge-sm shrink-0
-                  {goal.orientation === 'performance' ? 'badge-warning' : ''}">
-        {goal.orientation}
-      </div>
-    </div>
-    {#if goal.description}
-      <p class="text-xs text-base-content/50 leading-relaxed">{goal.description}</p>
-    {/if}
+  <div class="flex items-baseline justify-between gap-4">
+    <span class="font-['Cormorant'] text-2xl font-light text-base-content group-hover:text-primary
+                 transition-colors duration-200 leading-tight">
+      {goal.name}
+    </span>
+    <span class="font-['Crimson_Pro'] text-xs tracking-[0.12em] uppercase text-base-content/30
+                 group-hover:text-base-content/50 transition-colors shrink-0">
+      {goal.orientation}
+    </span>
   </div>
-</div>
+  {#if goal.description}
+    <p class="font-['Crimson_Pro'] italic text-sm text-base-content/35 mt-1 leading-relaxed
+              group-hover:text-base-content/50 transition-colors">
+      {goal.description}
+    </p>
+  {/if}
+</button>

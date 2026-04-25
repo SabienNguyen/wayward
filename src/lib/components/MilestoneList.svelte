@@ -8,7 +8,6 @@
   } = $props();
 
   let newName = $state('');
-
   const completed = $derived(milestones.filter(m => m.completed).length);
 
   function handleAdd() {
@@ -18,30 +17,80 @@
   }
 </script>
 
-<section class="flex flex-col gap-2 mb-8">
-  <div class="flex items-center justify-between mb-1">
-    <span class="text-xs font-bold uppercase tracking-widest text-base-content/40">Milestones</span>
+<section>
+  <div class="flex items-baseline justify-between mb-4">
+    <span class="section-label">Milestones</span>
     {#if milestones.length > 0}
-      <span class="text-xs text-base-content/40">{completed}/{milestones.length} done</span>
+      <span class="font-['Crimson_Pro'] text-xs text-base-content/30 tracking-wide">
+        {completed} of {milestones.length}
+      </span>
     {/if}
   </div>
 
-  {#each milestones as m (m.id)}
-    <label class="flex items-center gap-3 p-3 bg-base-100 border border-base-300 rounded-lg
-                  cursor-pointer {m.completed ? 'opacity-50' : ''}">
-      <input
-        type="checkbox"
-        class="checkbox checkbox-sm"
-        checked={m.completed}
-        onchange={(e) => ontoggle(m.id, e.currentTarget.checked)}
-      />
-      <span class="text-sm {m.completed ? 'line-through text-base-content/40' : ''}">{m.name}</span>
-    </label>
-  {/each}
+  <div class="flex flex-col">
+    {#each milestones as m (m.id)}
+      <label class="milestone-row {m.completed ? 'is-done' : ''}">
+        <button
+          class="milestone-check"
+          onclick={() => ontoggle(m.id, !m.completed)}
+          aria-label={m.completed ? 'Mark incomplete' : 'Mark complete'}
+          type="button"
+        >
+          {m.completed ? '◆' : '◇'}
+        </button>
+        <span class="font-['Crimson_Pro'] text-base leading-relaxed">{m.name}</span>
+      </label>
+    {/each}
+  </div>
 
-  <form class="flex gap-2 mt-1" onsubmit={(e) => { e.preventDefault(); handleAdd(); }}>
-    <input class="input input-bordered input-sm flex-1" bind:value={newName}
-      placeholder="Add a milestone..." />
-    <button type="submit" class="btn btn-ghost btn-sm">Add</button>
+  <form class="flex items-center gap-3 mt-3 pt-3 border-t border-base-content/10"
+    onsubmit={(e) => { e.preventDefault(); handleAdd(); }}>
+    <input
+      class="flex-1 bg-transparent border-none outline-none font-['Crimson_Pro'] text-base
+             text-base-content/70 placeholder:text-base-content/20 placeholder:italic"
+      bind:value={newName}
+      placeholder="add a milestone..."
+    />
+    <button type="submit"
+      class="font-['Crimson_Pro'] text-xs tracking-widest uppercase text-base-content/30
+             hover:text-base-content/60 transition-colors">
+      add
+    </button>
   </form>
 </section>
+
+<style>
+  .section-label {
+    font-family: 'Crimson Pro', serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(var(--bc) / 0.35);
+  }
+
+  .milestone-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid oklch(var(--bc) / 0.07);
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .milestone-row.is-done {
+    opacity: 0.35;
+    text-decoration: line-through;
+  }
+
+  .milestone-check {
+    font-size: 13px;
+    color: oklch(var(--p));
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+</style>
