@@ -9,13 +9,13 @@
   $effect(() => {
     const saved = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    isDark = saved ? saved === 'black' : prefersDark;
-    document.documentElement.setAttribute('data-theme', isDark ? 'black' : 'lofi');
+    isDark = saved ? saved === 'dim' : prefersDark;
+    document.documentElement.setAttribute('data-theme', isDark ? 'dim' : 'silk');
   });
 
   function toggleTheme() {
     isDark = !isDark;
-    const theme = isDark ? 'black' : 'lofi';
+    const theme = isDark ? 'dim' : 'silk';
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }

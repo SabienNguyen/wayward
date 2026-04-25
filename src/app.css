@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: lofi --default, black --prefersdark;
+  themes: silk --default, dim --prefersdark;
 }
 
 html, body, #svelte {
