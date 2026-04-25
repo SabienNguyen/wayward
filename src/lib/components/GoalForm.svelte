@@ -21,144 +21,48 @@
   }
 </script>
 
-<form class="goal-form" onsubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-  <div class="field">
-    <label for="name">Goal name</label>
-    <input id="name" bind:value={name} placeholder="What do you want to achieve?" />
-  </div>
+<form class="flex flex-col gap-5" onsubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+  <label class="form-control w-full">
+    <div class="label pb-1"><span class="label-text font-semibold">Goal name</span></div>
+    <input class="input input-bordered w-full" bind:value={name}
+      placeholder="What do you want to achieve?" />
+  </label>
 
-  <div class="field">
-    <label for="description">Description</label>
-    <textarea id="description" bind:value={description} rows="3"
+  <label class="form-control w-full">
+    <div class="label pb-1"><span class="label-text font-semibold">Description</span></div>
+    <textarea class="textarea textarea-bordered w-full" bind:value={description} rows="3"
       placeholder="What does achieving this look like?"></textarea>
-  </div>
+  </label>
 
-  <div class="field">
-    <label for="motivation">Motivation</label>
-    <textarea id="motivation" bind:value={motivation} rows="2"
+  <label class="form-control w-full">
+    <div class="label pb-1"><span class="label-text font-semibold">Motivation</span></div>
+    <textarea class="textarea textarea-bordered w-full" bind:value={motivation} rows="2"
       placeholder="Why does this matter to you?"></textarea>
-  </div>
+  </label>
 
-  <fieldset class="field orientation-field">
-    <legend class="field-legend">Orientation</legend>
-    <div class="orientation-options">
-      <label class="radio-label" class:selected={orientation === 'learning'}>
-        <input type="radio" bind:group={orientation} value="learning" />
-        <span>
-          <strong>Learning</strong>
-          <span class="radio-hint">Improve, discover, master</span>
-        </span>
-      </label>
-      <label class="radio-label" class:selected={orientation === 'performance'}>
-        <input type="radio" bind:group={orientation} value="performance" />
-        <span>
-          <strong>Performance</strong>
-          <span class="radio-hint">Prove it, hit a benchmark</span>
-        </span>
-      </label>
-    </div>
+  <fieldset class="flex flex-col gap-2">
+    <legend class="label-text font-semibold mb-1">Orientation</legend>
+    <label class="flex items-center gap-3 p-3 border border-base-300 rounded-lg cursor-pointer
+                  transition-colors {orientation === 'learning' ? 'border-base-content bg-base-200' : ''}">
+      <input type="radio" class="radio radio-sm" bind:group={orientation} value="learning" />
+      <span class="flex flex-col">
+        <span class="font-semibold text-sm">Learning</span>
+        <span class="text-xs text-base-content/50">Improve, discover, master</span>
+      </span>
+    </label>
+    <label class="flex items-center gap-3 p-3 border border-base-300 rounded-lg cursor-pointer
+                  transition-colors {orientation === 'performance' ? 'border-base-content bg-base-200' : ''}">
+      <input type="radio" class="radio radio-sm" bind:group={orientation} value="performance" />
+      <span class="flex flex-col">
+        <span class="font-semibold text-sm">Performance</span>
+        <span class="text-xs text-base-content/50">Prove it, hit a benchmark</span>
+      </span>
+    </label>
   </fieldset>
 
   {#if error}
-    <p class="error">{error}</p>
+    <p class="text-error text-sm">{error}</p>
   {/if}
 
-  <button type="submit" class="btn-primary">Save Goal</button>
+  <button type="submit" class="btn btn-primary w-full">Save Goal</button>
 </form>
-
-<style>
-  .goal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .orientation-field {
-    border: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .field-legend {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-  }
-
-  input, textarea {
-    padding: 9px 12px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    background: var(--surface);
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  .orientation-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .radio-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: normal;
-    text-transform: none;
-    letter-spacing: normal;
-    color: var(--text);
-    transition: border-color 0.15s ease;
-  }
-
-  .radio-label.selected {
-    border-color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 5%, transparent);
-  }
-
-  .radio-hint {
-    display: block;
-    font-size: 12px;
-    color: var(--text-muted);
-    font-weight: normal;
-  }
-
-  .error {
-    font-size: 13px;
-    color: var(--error, #e05);
-  }
-
-  .btn-primary {
-    padding: 10px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: var(--radius);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-</style>

@@ -56,106 +56,35 @@
 
 <AuthGuard>
   {#if goal}
-    <div class="goal-detail">
-      <div class="detail-header">
-        <button class="btn-back" onclick={() => goto('/goals')}>← Goals</button>
-        <button class="btn-delete" onclick={handleDelete}>Delete</button>
+    <div class="flex flex-col gap-5 pt-4">
+      <div class="flex items-center justify-between">
+        <button class="btn btn-ghost btn-sm px-0 text-base-content/40" onclick={() => goto('/goals')}>← Goals</button>
+        <button class="btn btn-ghost btn-sm text-error" onclick={handleDelete}>Delete</button>
       </div>
 
-      <div class="goal-meta">
-        <h2>{goal.name}</h2>
-        <span class="orientation-badge" class:performance={goal.orientation === 'performance'}>
+      <div class="flex items-center gap-3 flex-wrap">
+        <h2 class="text-xl font-bold">{goal.name}</h2>
+        <div class="badge badge-outline badge-sm {goal.orientation === 'performance' ? 'badge-warning' : ''}">
           {goal.orientation}
-        </span>
+        </div>
       </div>
 
       {#if goal.description}
-        <p class="description">{goal.description}</p>
+        <p class="text-sm text-base-content/60 leading-relaxed">{goal.description}</p>
       {/if}
 
       {#if goal.motivation}
-        <p class="motivation"><em>Why: {goal.motivation}</em></p>
+        <p class="text-sm text-base-content/50 italic">Why: {goal.motivation}</p>
       {/if}
 
-      <MilestoneList
-        {milestones}
-        onadd={handleAddMilestone}
-        ontoggle={handleToggleMilestone}
-      />
+      <div class="divider my-0"></div>
 
-      <SessionLog
-        {sessions}
-        orientation={goal.orientation}
-        onadd={handleAddSession}
-      />
+      <MilestoneList {milestones} onadd={handleAddMilestone} ontoggle={handleToggleMilestone} />
+      <SessionLog {sessions} orientation={goal.orientation} onadd={handleAddSession} />
     </div>
   {:else}
-    <p class="muted">Loading...</p>
+    <div class="flex items-center justify-center h-full">
+      <span class="loading loading-spinner loading-md text-base-content/30"></span>
+    </div>
   {/if}
 </AuthGuard>
-
-<style>
-  .goal-detail {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 16px;
-  }
-
-  .detail-header {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .btn-back, .btn-delete {
-    background: none;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .btn-back { color: var(--text-muted); }
-  .btn-delete { color: #ef4444; }
-
-  .goal-meta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  h2 {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--text);
-    margin: 0;
-  }
-
-  .orientation-badge {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 99px;
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
-    color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-  }
-
-  .orientation-badge.performance {
-    background: color-mix(in srgb, #f59e0b 12%, transparent);
-    color: #b45309;
-    border-color: color-mix(in srgb, #f59e0b 30%, transparent);
-  }
-
-  .description, .motivation {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text-muted);
-    margin: 0;
-  }
-
-  .muted { color: var(--text-muted); font-size: 14px; }
-</style>

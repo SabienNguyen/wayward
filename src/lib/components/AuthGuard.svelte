@@ -15,15 +15,7 @@
 {#if authStore.user}
   {@render children()}
 {:else if authStore.loading}
-  <div class="loading-screen">Loading...</div>
+  <div class="flex items-center justify-center h-full">
+    <span class="loading loading-spinner loading-md text-base-content/30"></span>
+  </div>
 {/if}
-
-<style>
-  .loading-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--text-muted);
-  }
-</style>

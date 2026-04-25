@@ -16,59 +16,31 @@
     try {
       await goalsStore.create(authStore.user.uid, data);
       goto('/goals');
-    } catch {
-      error = 'Failed to save goal. Try again.';
+    } catch (e) {
+      console.error('Goal save failed:', e);
+      error = e instanceof Error ? e.message : 'Failed to save goal. Try again.';
       saving = false;
     }
   }
 </script>
 
 <AuthGuard>
-  <div class="new-goal-page">
-    <div class="page-header">
-      <button class="btn-back" onclick={() => goto('/goals')}>← Back</button>
-      <h2 class="section-heading">New Goal</h2>
+  <div class="flex flex-col gap-6 pt-4">
+    <div class="flex items-center gap-3">
+      <button class="btn btn-ghost btn-sm px-0 text-base-content/40" onclick={() => goto('/goals')}>← Back</button>
+      <span class="text-xs font-bold uppercase tracking-widest text-base-content/40">New Goal</span>
     </div>
 
-    {#if error}<p class="error">{error}</p>{/if}
+    {#if error}
+      <div class="alert alert-error text-sm">{error}</div>
+    {/if}
+
     {#if saving}
-      <p class="muted">Saving...</p>
+      <div class="flex items-center gap-2 text-sm text-base-content/40">
+        <span class="loading loading-spinner loading-sm"></span> Saving...
+      </div>
     {:else}
       <GoalForm onsubmit={handleSubmit} />
     {/if}
   </div>
 </AuthGuard>
-
-<style>
-  .new-goal-page {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding-top: 16px;
-  }
-
-  .page-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .btn-back {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-size: 14px;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .error {
-    color: var(--error, #e05);
-    font-size: 13px;
-  }
-
-  .muted {
-    color: var(--text-muted);
-    font-size: 14px;
-  }
-</style>

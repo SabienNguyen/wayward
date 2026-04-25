@@ -4,100 +4,41 @@
 
   let { children } = $props();
 
-  let theme = $state<'light' | 'dark'>('light');
+  let isDark = $state(false);
 
   $effect(() => {
-    const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    const saved = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    theme = saved ?? (prefersDark ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
+    isDark = saved ? saved === 'black' : prefersDark;
+    document.documentElement.setAttribute('data-theme', isDark ? 'black' : 'lofi');
   });
 
   function toggleTheme() {
-    theme = theme === 'dark' ? 'light' : 'dark';
+    isDark = !isDark;
+    const theme = isDark ? 'black' : 'lofi';
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }
 </script>
 
-<div class="app-shell">
-  <header class="app-header">
-    <span class="logo">◆ Wayward</span>
-    <div class="header-actions">
+<div class="flex flex-col h-full">
+  <div class="navbar bg-base-100 border-b border-base-300 shadow-sm min-h-12 px-4">
+    <div class="navbar-start">
+      <span class="font-bold text-base tracking-tight">◆ Wayward</span>
+    </div>
+    <div class="navbar-end gap-1">
       {#if authStore.user}
-        <button class="btn-ghost sign-out" onclick={() => authStore.signOut()}>Sign out</button>
+        <button class="btn btn-ghost btn-sm text-base-content/50" onclick={() => authStore.signOut()}>
+          Sign out
+        </button>
       {/if}
-      <button class="theme-toggle btn-ghost" onclick={toggleTheme} aria-label="Toggle theme">
-        {theme === 'dark' ? '☀' : '☾'}
+      <button class="btn btn-ghost btn-circle btn-sm" onclick={toggleTheme} aria-label="Toggle theme">
+        {isDark ? '☀' : '☾'}
       </button>
     </div>
-  </header>
+  </div>
 
-  <main class="app-content">
+  <main class="flex-1 overflow-y-auto py-5 px-4 max-w-2xl w-full mx-auto">
     {@render children()}
   </main>
 </div>
-
-<style>
-  .app-shell {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .app-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    height: 48px;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    flex-shrink: 0;
-  }
-
-  .logo {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--accent);
-  }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .theme-toggle {
-    font-size: 16px;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-  }
-
-  .sign-out {
-    font-size: 13px;
-    color: var(--text-muted);
-    padding: 4px 10px;
-  }
-
-  .btn-ghost {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-  }
-
-  .app-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    max-width: 720px;
-    width: 100%;
-    margin: 0 auto;
-  }
-</style>

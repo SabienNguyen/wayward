@@ -1,153 +1,18 @@
-/* ── Cozy Crossing Theme ────────────────────────── */
-
-:root {
-  --bg: #faf9f4;
-  --surface: #ffffff;
-  --surface-2: #f0efe9;
-  --accent: #5aab70;
-  --accent-hover: #4a9360;
-  --text: #2d2d2d;
-  --text-muted: #6b7280;
-  --border: #e8e5dd;
-  --radius: 10px;
-  --radius-sm: 6px;
-  --shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.10);
-  --transition: 0.15s ease;
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: lofi --default, black --prefersdark;
 }
 
-[data-theme="dark"] {
-  --bg: #1b2535;
-  --surface: #243045;
-  --surface-2: #2d3a52;
-  --accent: #7ecda8;
-  --accent-hover: #6bbf96;
-  --text: #e8f0f8;
-  --text-muted: #94a3b8;
-  --border: #2d3a52;
-  --shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.35);
-}
-
-/* ── Reset ──────────────────────────────────────── */
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* ── Base ───────────────────────────────────────── */
-
-html {
+html, body, #svelte {
   height: 100%;
-}
-
-body {
-  height: 100%;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
-  background: var(--bg);
-  color: var(--text);
-  transition: background var(--transition), color var(--transition);
 }
 
 #svelte {
-  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-/* ── Typography ─────────────────────────────────── */
-
-h1, h2, h3 {
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.section-heading {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 12px;
-}
-
-/* ── Scrollbar ──────────────────────────────────── */
-
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
-}
-
-/* ── Shared Button Styles ───────────────────────── */
-
-button {
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-  font-size: 14px;
-  transition: background var(--transition), color var(--transition), opacity var(--transition);
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 99px;
-  font-weight: 500;
-}
-
-.btn-primary:hover {
-  background: var(--accent-hover);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--text-muted);
-  padding: 4px 8px;
-  border-radius: var(--radius-sm);
-}
-
-.btn-ghost:hover {
-  background: var(--surface-2);
-  color: var(--text);
-}
-
-/* ── Shared Input Styles ────────────────────────── */
-
-input, textarea {
-  font-family: inherit;
-  font-size: 14px;
-  background: var(--surface-2);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  outline: none;
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-
-input:focus, textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
-}
-
-input::placeholder, textarea::placeholder {
-  color: var(--text-muted);
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: oklch(var(--b3)); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(var(--bc) / 0.3); }
