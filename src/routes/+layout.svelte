@@ -4,21 +4,9 @@
 
   let { children } = $props();
 
-  let isDark = $state(false);
-
   $effect(() => {
-    const saved = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    isDark = saved ? saved === 'dim' : prefersDark;
-    document.documentElement.setAttribute('data-theme', isDark ? 'dim' : 'silk');
+    document.documentElement.setAttribute('data-theme', 'coffee');
   });
-
-  function toggleTheme() {
-    isDark = !isDark;
-    const theme = isDark ? 'dim' : 'silk';
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }
 </script>
 
 <div class="flex flex-col h-full">
@@ -32,9 +20,6 @@
           Sign out
         </button>
       {/if}
-      <button class="btn btn-ghost btn-circle btn-sm" onclick={toggleTheme} aria-label="Toggle theme">
-        {isDark ? '☀' : '☾'}
-      </button>
     </div>
   </div>
 
