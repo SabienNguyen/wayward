@@ -1,13 +1,12 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { page } from '$app/stores';
-  import { goto } from '$app/navigation';
-  import GoalsStrip from '$lib/components/GoalsStrip.svelte';
+  import { authStore } from '$lib/stores/auth.svelte';
   import '../app.css';
 
-  let theme: 'light' | 'dark' = 'light';
+  let { children } = $props();
 
-  onMount(() => {
+  let theme = $state<'light' | 'dark'>('light');
+
+  $effect(() => {
     const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     theme = saved ?? (prefersDark ? 'dark' : 'light');
@@ -19,43 +18,23 @@
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }
-
-  $: mode = $page.url.pathname.startsWith('/journal') ? 'journal' : 'do';
 </script>
 
 <div class="app-shell">
   <header class="app-header">
     <span class="logo">◆ Wayward</span>
-    <button class="theme-toggle btn-ghost" on:click={toggleTheme} aria-label="Toggle theme">
-      {theme === 'dark' ? '☀' : '☾'}
-    </button>
-  </header>
-
-  <div class="goals-bar">
-    <GoalsStrip />
-  </div>
-
-  <div class="mode-toggle-bar">
-    <div class="mode-toggle">
-      <button
-        class="mode-btn"
-        class:active={mode === 'do'}
-        on:click={() => goto('/do')}
-      >
-        Do
-      </button>
-      <button
-        class="mode-btn"
-        class:active={mode === 'journal'}
-        on:click={() => goto('/journal')}
-      >
-        Journal
+    <div class="header-actions">
+      {#if authStore.user}
+        <button class="btn-ghost sign-out" onclick={() => authStore.signOut()}>Sign out</button>
+      {/if}
+      <button class="theme-toggle btn-ghost" onclick={toggleTheme} aria-label="Toggle theme">
+        {theme === 'dark' ? '☀' : '☾'}
       </button>
     </div>
-  </div>
+  </header>
 
   <main class="app-content">
-    <slot />
+    {@render children()}
   </main>
 </div>
 
@@ -66,7 +45,6 @@
     height: 100%;
   }
 
-  /* Header */
   .app-header {
     display: flex;
     align-items: center;
@@ -86,6 +64,12 @@
     color: var(--accent);
   }
 
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .theme-toggle {
     font-size: 16px;
     width: 32px;
@@ -96,53 +80,18 @@
     border-radius: 50%;
   }
 
-  /* Goals bar */
-  .goals-bar {
-    background: var(--surface-2);
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  /* Mode toggle */
-  .mode-toggle-bar {
-    display: flex;
-    justify-content: center;
-    padding: 12px 0 0;
-    background: var(--bg);
-    flex-shrink: 0;
-  }
-
-  .mode-toggle {
-    display: flex;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 99px;
-    padding: 3px;
-    gap: 2px;
-    box-shadow: var(--shadow);
-  }
-
-  .mode-btn {
-    padding: 5px 22px;
-    border-radius: 99px;
-    font-size: 14px;
-    font-weight: 500;
+  .sign-out {
+    font-size: 13px;
     color: var(--text-muted);
+    padding: 4px 10px;
+  }
+
+  .btn-ghost {
     background: transparent;
-    transition: all 0.15s ease;
+    border: none;
+    cursor: pointer;
   }
 
-  .mode-btn:hover:not(.active) {
-    background: var(--surface-2);
-    color: var(--text);
-  }
-
-  .mode-btn.active {
-    background: var(--accent);
-    color: #fff;
-  }
-
-  /* Content area */
   .app-content {
     flex: 1;
     overflow-y: auto;

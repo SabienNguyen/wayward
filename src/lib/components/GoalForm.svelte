@@ -39,8 +39,8 @@
       placeholder="Why does this matter to you?"></textarea>
   </div>
 
-  <div class="field">
-    <label>Orientation</label>
+  <fieldset class="field orientation-field">
+    <legend class="field-legend">Orientation</legend>
     <div class="orientation-options">
       <label class="radio-label" class:selected={orientation === 'learning'}>
         <input type="radio" bind:group={orientation} value="learning" />
@@ -57,7 +57,7 @@
         </span>
       </label>
     </div>
-  </div>
+  </fieldset>
 
   {#if error}
     <p class="error">{error}</p>
@@ -85,6 +85,21 @@
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.04em;
+  }
+
+  .orientation-field {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .field-legend {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
   }
 
   input, textarea {
