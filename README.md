@@ -1,69 +1,83 @@
 # Wayward
 
-A productivity app built around the Eisenhower Matrix. Two modes: **Do** for tasks, **Journal** for thoughts. No due dates, no overdue guilt — just clarity on what matters.
+A minimalist goals tracker built around intentional progress — not deadlines. Set up to three goals, break them into milestones, and log sessions as you work toward them.
 
-## Modes
+## Features
 
-- **Do** — Q1 (urgent & important) and Q2 (what matters). Q2 tasks have no deadlines; the app keeps them visible so you work on them when you're ready.
-- **Journal** — Write entries throughout the day. Entries lock at midnight and can't be edited after.
-- **Goals** — Up to 3 goals, locked for one year from creation.
+- **Goals** — up to 3 active goals, each with a name, description, motivation, and orientation (learning vs. performance)
+- **Milestones** — per-goal checkpoints you can mark complete as you progress
+- **Session log** — timestamped entries per goal to record what you worked on and when
+- **Google Auth** — sign in with Google; all data is scoped to your account
+- **Literary aesthetic** — Cormorant + Crimson Pro typography on a coffee-toned DaisyUI theme
 
-## Installation
+## Tech Stack
 
-### Desktop (pre-built)
+| Layer | Choice |
+|---|---|
+| Frontend | SvelteKit 2 + Svelte 5 |
+| Styling | Tailwind v4 + DaisyUI (coffee theme) |
+| Backend | Firebase (Firestore + Auth) |
+| Build | Vite + static adapter |
+| PWA | vite-plugin-pwa |
+| Tests | Vitest |
 
-Download the latest release for your platform from the [Releases](../../releases) page:
-- **Linux** — `.deb` (Debian/Ubuntu) or `.rpm` (Fedora/Arch)
-- **macOS** — `.dmg`
-- **Windows** — `.msi`
+## Data Model
 
-### Build from source
+```
+users/{uid}/
+  goals/{goalId}          — name, description, motivation, orientation, created_at
+    sessions/{sessionId}  — content, logged_at
+    milestones/{id}       — name, completed, created_at
+```
 
-**Prerequisites:**
-- [Rust](https://rustup.rs/) (stable)
-- [Node.js](https://nodejs.org/) 18+
-- Linux only: `webkit2gtk-4.1` — install via your package manager:
-  ```bash
-  # Arch
-  sudo pacman -S webkit2gtk-4.1
+## Getting Started
 
-  # Ubuntu/Debian
-  sudo apt install libwebkit2gtk-4.1-dev
-  ```
+### 1. Firebase project
 
-**Build:**
+1. Create a project at [console.firebase.google.com](https://console.firebase.google.com)
+2. Enable **Firestore** and **Authentication → Google provider**
+3. Copy your web app config
+
+### 2. Environment
+
 ```bash
-git clone https://github.com/SabienNguyen/wayward
-cd wayward
+cp .env.example .env
+```
+
+Fill in `.env` with your Firebase config values:
+
+```env
+VITE_FIREBASE_API_KEY=...
+VITE_FIREBASE_AUTH_DOMAIN=...
+VITE_FIREBASE_PROJECT_ID=...
+VITE_FIREBASE_STORAGE_BUCKET=...
+VITE_FIREBASE_MESSAGING_SENDER_ID=...
+VITE_FIREBASE_APP_ID=...
+```
+
+### 3. Install and run
+
+```bash
 npm install
-npm run tauri build
+npm run dev
 ```
 
-The output binary and installers are in `src-tauri/target/release/bundle/`.
-
-### Mobile
-
-**Android** (requires [Android Studio](https://developer.android.com/studio) + NDK):
-```bash
-npm run tauri android init
-npm run tauri android dev
-```
-
-**iOS** (macOS only, requires Xcode):
-```bash
-npm run tauri ios init
-npm run tauri ios dev
-```
-
-## Development
+## Commands
 
 ```bash
-npm install
-npm run tauri dev        # Start with live reload
-cd src-tauri && cargo test   # Run Rust tests (no window needed)
-npm run check            # TypeScript type check
+npm run dev          # Dev server with hot reload
+npm run build        # Production build
+npm run preview      # Preview production build locally
+npm run check        # TypeScript check
+npm run test         # Run Vitest tests
 ```
 
-## Sync
+## Firestore Security Rules
 
-Devices sync automatically over LAN — no account or internet required. Open the app on two devices on the same network and they'll find each other via mDNS and exchange changes directly.
+Deploy the included rules before going to production:
+
+```bash
+firebase deploy --only firestore:rules
+```
+
+The rules in `firestore.rules` restrict each user to their own data path (`users/{uid}/...`).
