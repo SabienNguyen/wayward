@@ -1,0 +1,266 @@
+[
+  {
+    "id": "pieces",
+    "title": "How the Pieces Move",
+    "summary": "Each piece has its own way of moving, and you cannot land on your own pieces.",
+    "body": [
+      "Pawns move one square forward (two from their starting rank) and capture one square diagonally forward. They never move backwards.",
+      "Knights jump in an L shape, two squares one way and one square the other. They are the only pieces that can jump over others.",
+      "Bishops slide any distance along diagonals. Rooks slide along ranks and files. The queen combines both.",
+      "The king moves one square in any direction. A piece may capture an enemy piece on its destination square, but never a friendly piece."
+    ],
+    "start": "startpos",
+    "moves": ["e2e4", "e7e5", "g1f3", "b8c6", "f1c4", "g8f6", "d1e2"],
+    "notes": {
+      "0": "The e-pawn jumps two squares on its first move.",
+      "2": "The knight goes out in an L: two squares, then one sideways.",
+      "4": "The bishop slides along the diagonal c4-d5-e6-f7 once e2 is empty.",
+      "6": "The queen slides along the diagonal to e2, which the e-pawn has vacated."
+    },
+    "key": "Every piece moves in its own pattern; only the knight can jump."
+  },
+  {
+    "id": "special-moves",
+    "title": "Castling, En Passant and Promotion",
+    "summary": "Three special rules, each shown in one position where it happens.",
+    "body": [
+      "Castling moves the king two squares toward a rook and puts the rook on the other side of the king. It is allowed only if neither piece has moved, the squares between them are empty, and the king is not in check or passing through an attacked square.",
+      "En passant lets a pawn that has just moved two squares be captured by an enemy pawn that could have taken it if it had moved one square. The capture must be made immediately, on the next move only.",
+      "A pawn that reaches the last rank must promote to a queen, rook, bishop or knight. Most of the time you choose a queen."
+    ],
+    "start": "r3k2r/1P3ppp/8/3pP3/8/8/8/R3K2R w KQkq d6 0 1",
+    "moves": ["e5d6", "e8d7", "e1g1", "h8g8", "b7b8q"],
+    "notes": {
+      "0": "En passant: White's e5 pawn takes the d5 pawn that just jumped past it, landing on d6.",
+      "1": "Black's king steps to d7. The move is legal because no White piece attacks d7.",
+      "2": "Castling kingside: the king goes e1 to g1 and the rook jumps from h1 to f1.",
+      "4": "Promotion: the b7 pawn reaches the last rank and becomes a queen on b8."
+    },
+    "key": "Castling, en passant and promotion are all legal ways to change the board that ordinary moves cannot."
+  },
+  {
+    "id": "principles-italian",
+    "title": "Opening Principles and the Italian Game",
+    "summary": "Control the centre, develop your pieces and castle early, shown in the Italian Game.",
+    "body": [
+      "In the opening, three goals matter most. Fight for the centre with pawns and pieces. Develop knights and bishops toward the middle of the board. Castle early so your king is safe and a rook can join the game.",
+      "1.e4 e5 2.Nf3 Nc6 3.Bc4 is the Italian Game. White's bishop aims at f7, the weakest square in Black's camp, next to the king.",
+      "Moving the same piece twice in the opening usually wastes time. Each move should develop a piece, fight for the centre or prepare castling."
+    ],
+    "start": "startpos",
+    "moves": ["e2e4", "e7e5", "g1f3", "b8c6", "f1c4", "f8c5", "c2c3", "g8f6", "d2d3", "d7d6", "e1g1", "e8g8"],
+    "notes": {
+      "0": "1.e4 takes the centre with a pawn and opens lines for the queen and bishop.",
+      "2": "2.Nf3 develops a knight and attacks the e5 pawn.",
+      "4": "3.Bc4 is the Italian Game bishop, aiming at f7.",
+      "6": "4.c3 prepares d4 to take more centre space.",
+      "10": "White castles early: the king is safe and the rook joins the game.",
+      "11": "Black castles too. Both kings are safe, and both sides have developed."
+    },
+    "key": "Centre, develop, castle: most opening moves should serve one of these three."
+  },
+  {
+    "id": "ruy-lopez",
+    "title": "The Ruy Lopez",
+    "summary": "A long-lived opening where White's bishop pins the idea of attacking the knight on c6.",
+    "body": [
+      "1.e4 e5 2.Nf3 Nc6 3.Bb5 is the Ruy Lopez. The bishop on b5 does not capture yet. It pressures the knight on c6, which defends e5.",
+      "Black usually answers with 3...a6, asking the bishop what it intends to do. White moves the bishop to a4 or takes on c6.",
+      "This line shows a typical plan: White castles, puts the rook on e1, and prepares c3 and d4 to take the centre. Black castles too."
+    ],
+    "start": "startpos",
+    "moves": ["e2e4", "e7e5", "g1f3", "b8c6", "f1b5", "a7a6", "b5a4", "g8f6", "e1g1", "f8e7", "f1e1", "b7b5", "a4b3", "d7d6", "c2c3", "e8g8"],
+    "notes": {
+      "4": "3.Bb5 pressures the knight on c6, which defends the e5 pawn.",
+      "5": "3...a6 asks the bishop to commit.",
+      "6": "4.Ba4 keeps the pressure on the knight along the a4-e8 diagonal.",
+      "8": "White castles. The rook can now come to e1 to support the e-pawn.",
+      "11": "Black plays ...b5 to keep the bishop on the b-file and defend c6.",
+      "12": "5.Bb3 retreats the bishop to a safe diagonal.",
+      "14": "6.c3 prepares d4 to take the centre.",
+      "15": "Black castles, and the kings are both safe."
+    },
+    "key": "The Ruy Lopez keeps pressure on c6 for a long time while both sides develop."
+  },
+  {
+    "id": "queens-gambit",
+    "title": "The Queen's Gambit",
+    "summary": "White offers a pawn with c4 to attack d5 and gain the centre.",
+    "body": [
+      "1.d4 d5 2.c4 is the Queen's Gambit. The c-pawn attacks the d5 pawn. If Black takes on c4, White can regain the pawn and keep a strong centre.",
+      "The move is not a real sacrifice in most lines. Black usually defends d5 with ...e6 or ...c6 and gets a solid position.",
+      "Black's ...e6 and ...Nf6 build a solid structure. White usually develops with Nc3, Bg5, e3 and Nf3 before castling."
+    ],
+    "start": "startpos",
+    "moves": ["d2d4", "d7d5", "c2c4", "e7e6", "b1c3", "g8f6", "c1g5", "f8e7", "e2e3", "e8g8", "g1f3"],
+    "notes": {
+      "2": "2.c4 attacks d5 and offers a pawn to open lines.",
+      "3": "3...e6 defends d5 and keeps a solid pawn chain.",
+      "4": "3.Nc3 develops a knight toward the centre.",
+      "6": "4.Bg5 develops the bishop and pins nothing yet, but puts pressure on f6.",
+      "8": "5.e3 supports the centre and frees the bishop on c1 from a blocked diagonal.",
+      "9": "Black castles and keeps both sides balanced."
+    },
+    "key": "The Queen's Gambit fights for the centre; Black defends with solid pawns instead of accepting the gambit."
+  },
+  {
+    "id": "sicilian",
+    "title": "The Sicilian Defence",
+    "summary": "Black answers 1.e4 with 1...c5, fighting for d4 from the side.",
+    "body": [
+      "1.e4 c5 is the Sicilian Defence. Black does not mirror White's central pawn. Instead the c-pawn attacks d4 from the side.",
+      "Black gives up symmetry for activity. The half-open c-file gives Black chances to attack on the queenside later.",
+      "In the main line White plays d4, Black takes on d4, and White recaptures with a knight. Black keeps developing with ...Nf6 and ...a6."
+    ],
+    "start": "startpos",
+    "moves": ["e2e4", "c7c5", "g1f3", "d7d6", "d2d4", "c5d4", "f3d4", "g8f6", "b1c3", "a7a6"],
+    "notes": {
+      "1": "1...c5 contests the centre from the side.",
+      "3": "2...d6 prepares ...Nf6 and keeps the position flexible.",
+      "4": "3.d4 opens the centre and attacks the c5 pawn.",
+      "5": "3...cxd4 trades the centre pawns.",
+      "6": "4.Nxd4 recaptures with a knight that lands in the centre.",
+      "9": "...a6 prepares ...b5 and stops White's bishop going to b5."
+    },
+    "key": "The Sicilian fights for d4 from the side and leads to unbalanced positions."
+  },
+  {
+    "id": "fork",
+    "title": "The Fork",
+    "summary": "One piece attacks two enemy pieces at once.",
+    "body": [
+      "A fork is when one piece attacks two enemy pieces at the same time. The opponent can save only one of them.",
+      "Knights are especially good at forks because their L-shaped moves reach squares that other pieces cannot attack from the same spot.",
+      "Here the knight jumps to c7. It attacks the black king on e8 and the rook on a8 together."
+    ],
+    "start": "r3k3/8/8/3N4/8/8/8/4K3 w - - 0 1",
+    "moves": ["d5c7", "e8d7", "c7a8"],
+    "notes": {
+      "0": "Nc7 forks the king on e8 and the rook on a8. Black must move the king, so White wins the rook.",
+      "1": "Black king steps aside. The knight is still attacking a8.",
+      "2": "The knight takes the rook on a8."
+    },
+    "key": "A knight fork hits two pieces at once; the opponent can save only one."
+  },
+  {
+    "id": "pin",
+    "title": "The Pin",
+    "summary": "A piece cannot move because doing so would expose a more valuable piece behind it.",
+    "body": [
+      "A pin is a line from an attacking piece, through an enemy piece, to a more valuable piece or the king behind it. The pinned piece is not allowed to move, because that would expose the piece behind it to capture.",
+      "In this position the rook on e1 pins the black knight on e7 to the black king on e8. The knight cannot move at all, even though it is not in danger from a direct attack.",
+      "Moving the king off the e-file breaks the pin, and then the knight is free to move."
+    ],
+    "start": "4k3/4n3/8/8/8/8/8/4R1K1 w - - 0 1",
+    "moves": ["g1f2", "e8d8"],
+    "notes": {
+      "0": "White makes a quiet move. The knight on e7 still cannot move because it is pinned.",
+      "1": "Black moves the king off the e-file, breaking the pin. Now the knight is free."
+    },
+    "key": "A pinned piece cannot move without losing the piece behind it."
+  },
+  {
+    "id": "skewer",
+    "title": "The Skewer",
+    "summary": "An attack on a valuable piece forces it to move, exposing a less valuable piece behind it.",
+    "body": [
+      "A skewer is like a pin turned around. The attacked piece is the valuable one, and the piece behind it is the one you want to win.",
+      "Here the rook checks the black king on a4 along the a-file. The king must step off the file, and then the rook takes the rook behind it on a8.",
+      "Skewers often work with rooks and bishops along lines, and the king is the piece in front because it must move."
+    ],
+    "start": "r7/8/8/8/k7/8/7K/7R w - - 0 1",
+    "moves": ["h1a1", "a4b4", "a1a8"],
+    "notes": {
+      "0": "Ra1 checks the king on a4. The rook on a8 stands directly behind the king.",
+      "1": "The king steps off the a-file to b4, since it cannot stay in check.",
+      "2": "The rook slides up the open a-file and wins the rook on a8."
+    },
+    "key": "In a skewer, the valuable piece in front moves and the piece behind it falls."
+  },
+  {
+    "id": "discovered-attack",
+    "title": "Discovered Attack",
+    "summary": "Moving one piece uncovers an attack by another piece behind it.",
+    "body": [
+      "A discovered attack happens when a piece moves away from a line, and the piece behind it now attacks an enemy piece. The moving piece can also attack something on its own.",
+      "Here the knight on e4 blocks the rook on e1 from the black king on e8. When the knight moves, the rook gives check on the e-file.",
+      "When the moving piece also gives check, it is a double check. The king must move, because it cannot block or capture both checkers."
+    ],
+    "start": "4k3/8/8/8/4N3/8/8/4R1K1 w - - 0 1",
+    "moves": ["e4d6", "e8d7"],
+    "notes": {
+      "0": "The knight moves to d6 and uncovers the rook. The knight also checks the king on e8. This is a double check.",
+      "1": "Black has no way to block or capture both attackers, so the king must move. It steps to d7."
+    },
+    "key": "A discovered check from a piece that also gives check is a double check, and only a king move escapes it."
+  },
+  {
+    "id": "back-rank-mate",
+    "title": "Back-Rank Mate",
+    "summary": "A rook checks along the back rank, and the king cannot escape because its own pawns block it.",
+    "body": [
+      "A back-rank mate happens when the king is on its back rank and its own pawns block its escape squares. A rook or queen checking along the rank then has no answer.",
+      "Here the black king on g8 is walled in by pawns on f7, g7 and h7. The rook on e1 reaches e8 with check.",
+      "The defender can block on f8 only with a piece that is not there. The king cannot leave the rank, so it is checkmate."
+    ],
+    "start": "6k1/5ppp/8/8/8/8/8/4R1K1 w - - 0 1",
+    "moves": ["e1e8"],
+    "notes": {
+      "0": "Re8 is checkmate. The king on g8 cannot go to f8 or h8 along the rank, and its own pawns block the other squares."
+    },
+    "key": "Keep a luft (an escape square) for your king, or watch for back-rank checks."
+  },
+  {
+    "id": "king-queen-mate",
+    "title": "King and Queen Against King",
+    "summary": "The queen and king together drive the lone king to the edge and mate it.",
+    "body": [
+      "With a queen and king against a lone king, the goal is to restrict the enemy king to a small area first. Use the queen to cut off whole ranks and files, then bring your own king close.",
+      "Be careful not to stalemate: if the lone king has no legal move and is not in check, the game is a draw.",
+      "Here the queen checks along the eighth rank. The black king on h8 cannot escape to g8 or g7 and h7 are covered by the white king on g6."
+    ],
+    "start": "7k/8/6K1/8/8/8/8/1Q6 w - - 0 1",
+    "moves": ["b1b8"],
+    "notes": {
+      "0": "Qb8 is checkmate. The queen covers the eighth rank, and the white king covers g7 and h7."
+    },
+    "key": "Bring your king up, then use the queen to take away the escape squares."
+  },
+  {
+    "id": "king-rook-mate",
+    "title": "King and Rook Against King: The Box",
+    "summary": "The rook cuts off a rank, and the king steps in until the rook delivers mate.",
+    "body": [
+      "The rook cuts the enemy king into a box, usually along one rank. The king then moves up to help the rook shrink the box.",
+      "Here the rook on a7 covers the whole seventh rank. The black king on h8 has only one move, to g8, because g7 and h7 are covered by the rook and the white king.",
+      "Once the king is on g8, the rook steps to a8 with check and the position is mate. The king on g6 covers f7, g7 and h7."
+    ],
+    "start": "7k/8/6K1/8/8/8/8/R7 w - - 0 1",
+    "moves": ["a1a7", "h8g8", "a7a8"],
+    "notes": {
+      "0": "Ra7 cuts off the seventh rank. The black king is boxed into the eighth rank.",
+      "1": "Kg8 is the only legal move.",
+      "2": "Ra8 is checkmate. The rook checks along the eighth rank, and f7, g7 and h7 are all covered."
+    },
+    "key": "The rook builds a wall, the king provides the second wall, and the rook gives the final check."
+  },
+  {
+    "id": "opposition",
+    "title": "The Opposition in King and Pawn Endings",
+    "summary": "Kings facing each other with one square between them: the side that must move loses the opposition.",
+    "body": [
+      "Kings are on opposition when they stand on the same file (or rank) with exactly one square between them. In a king and pawn ending, the side that has the opposition usually wins, because the other king must step aside.",
+      "Here Black's king on e6 faces White's king on e4 with one square between them, and it is Black's move. Black must move away and give up the opposition.",
+      "When the king steps off, White uses its own king to take the opposition again. Look for the moment when the defender has to move and cannot wait."
+    ],
+    "start": "8/8/4k3/8/4K3/8/4P3/8 b - - 0 1",
+    "moves": ["e6d6", "e4d4", "d6e6", "d4e4"],
+    "notes": {
+      "0": "Black steps to d6 and gives up the opposition.",
+      "1": "White takes the opposition with Kd4. Black must move again.",
+      "2": "Black returns to e6, but it is still Black's move.",
+      "3": "White takes the opposition again with Ke4. Black is to move with kings opposing on the e-file."
+    },
+    "key": "Whoever is forced to move while the kings face each other loses the opposition."
+  }
+]
