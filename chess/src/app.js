@@ -30,8 +30,36 @@
     { id: 'l1', name: 'Beginner', detail: 'Looks one move ahead and often picks a random decent move', depth: 1, noise: 250 },
     { id: 'l2', name: 'Casual', detail: 'Looks two moves ahead, small mistakes', depth: 2, noise: 60 },
     { id: 'l3', name: 'Club', detail: 'Looks three moves ahead', depth: 3, noise: 15 },
-    { id: 'l4', name: 'Tough', detail: 'Looks four moves ahead; takes a few seconds', depth: 4, noise: 0 },
+    { id: 'b1', name: 'Expert', detail: 'Strong engine, thinks for about half a second', brainMs: 500 },
+    { id: 'b2', name: 'Master', detail: 'Strong engine, thinks for about two seconds', brainMs: 2000 },
+    { id: 'b3', name: 'Grandmaster', detail: 'Strongest setting, thinks for about five seconds', brainMs: 5000 },
   ];
+  // The strong engine (Brain) runs in a Web Worker so the board stays responsive.
+  let brainWorker = null, brainSeq = 0;
+  const brainWaiting = new Map();
+  function getBrainWorker() {
+    if (brainWorker !== null) return brainWorker;
+    try {
+      const src = document.getElementById('brainSrc').textContent;
+      brainWorker = new Worker(URL.createObjectURL(new Blob([src], { type: 'text/javascript' })));
+      brainWorker.onmessage = e => { const cb = brainWaiting.get(e.data.id); if (cb) { brainWaiting.delete(e.data.id); cb(e.data.res); } };
+      brainWorker.onerror = () => { brainWorker = false; for (const cb of brainWaiting.values()) cb(null); brainWaiting.clear(); };
+    } catch (e) { brainWorker = false; }
+    return brainWorker;
+  }
+  // Hashes of every earlier position in the game, so Brain can see repetitions.
+  function gameHashes(x) {
+    const s = x.start === 'startpos' ? initialState() : parseFen(x.start), out = [];
+    for (const h of x.history) { out.push(Brain.hashOf(toFen(s))); apply(s, fromUci(s, h.uci)); }
+    return out;
+  }
+  function brainThink(x, timeMs) {
+    const fen = toFen(x.s), opts = { timeMs, history: gameHashes(x) };
+    const w = getBrainWorker();
+    if (!w) return Promise.resolve(Brain.think(fen, { ...opts, timeMs: Math.min(timeMs, 800) }));
+    return new Promise(res => { const id = ++brainSeq; brainWaiting.set(id, res); w.postMessage({ id, fen, opts }); })
+      .then(r => r && !r.error ? r : Brain.think(fen, { ...opts, timeMs: Math.min(timeMs, 800) }));
+  }
   const levelById = id => LEVELS.find(l => l.id === id) || LEVELS[1];
   function analyze(s, depth = 3) {
     const out = [];
@@ -148,12 +176,18 @@
     const x = S();
     if (x.kind !== 'ai' || x.over || x.human.includes(x.s.turn)) return;
     G.thinking = true; render();
+    const L = levelById(x.level), before = x.history.length;
+    const done = uci => {
+      G.thinking = false;
+      if (S() !== x || x.history.length !== before) { render(); return; }
+      const m = uci && fromUci(x.s, uci);
+      if (m) play(m); else render();
+    };
+    if (L.brainMs) { brainThink(x, L.brainMs).then(r => done(r && r.uci)); return; }
     setTimeout(() => {
       if (S() !== x) { G.thinking = false; return; }
-      const L = levelById(x.level);
       const m = bestMove(x.s, L.depth, L.noise);
-      G.thinking = false;
-      if (m) play(fromUci(x.s, toUci(m))); else render();
+      done(m && toUci(m));
     }, 60);
   }
 
@@ -278,11 +312,14 @@ All legal moves (UCI): ${legal.map(toUci).join(' ')}`;
     save(); render();
     if (x.kind === 'ai') maybeEngine();
   }
-  function hint() {
+  async function hint() {
     if (!humanTurn()) return;
-    const x = S();
-    const m = bestMove(x.s, 3);
-    if (!m) return;
+    const x = S(), before = x.history.length;
+    $('hintBtn').disabled = true;
+    const r = await brainThink(x, 700);
+    if (S() !== x || x.history.length !== before) return;
+    const m = r && fromUci(x.s, r.uci);
+    if (!m) { render(); return; }
     G.hint = m; clearSel();
     setCoach(null, `<b>Engine hint:</b> try <span class="nt">${esc(toSan(x.s, m))}</span>. The green outline marks it. Ask the Tutor tab why it works.`);
     render();

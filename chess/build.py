@@ -8,6 +8,8 @@ def data(p):
     return json.dumps(json.load(open(full, encoding='utf-8')), ensure_ascii=False) if os.path.exists(full) else '[]'
 parts = {
     'CSS': rd('src/style.css'),
+    'BRAIN_SRC': rd('src/brain.js'),
+    'BRAIN': re.sub(r"\nif \(typeof module !== 'undefined'\) module\.exports.*\n", "\n", rd('src/brain.js')),
     'ENGINE': re.sub(r"\nif \(typeof module !== 'undefined'\) module\.exports.*\n", "\n", rd('src/engine.js')),
     'LESSONS': data('curriculum/lessons.json'),
     'PUZZLES': data('curriculum/puzzles.json'),
