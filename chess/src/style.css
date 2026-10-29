@@ -95,7 +95,7 @@ select, .btn { background: var(--panel); border: 1px solid var(--line); border-r
 .sq.target.has-piece::after { width: 92%; height: 92%; background: transparent; border: 4px solid rgba(30, 60, 50, .6); }
 .sq.threat::after { content: ""; position: absolute; width: 24%; height: 24%; border-radius: 50%; background: rgba(180, 40, 20, .65); pointer-events: none; z-index: 2; }
 .sq.threat.has-piece::after { width: 92%; height: 92%; background: transparent; border: 4px solid rgba(180, 40, 20, .6); }
-.pc { position: relative; z-index: 1; font-family: var(--font-piece); font-size: calc(var(--cell) * .78); line-height: 1; pointer-events: none; user-select: none; }
+.pc { position: relative; z-index: 1; font-family: var(--font-piece); font-variant-emoji: text; font-size: calc(var(--cell) * .78); line-height: 1; pointer-events: none; user-select: none; }
 .pc.w { color: #fbf8f1; -webkit-text-stroke: 1.4px #2a2219; text-shadow: 0 2px 2px rgba(0, 0, 0, .25); }
 .pc.b { color: #231c15; -webkit-text-stroke: .6px #000; text-shadow: 0 1px 1px rgba(255, 255, 255, .25); }
 @media (prefers-reduced-motion: no-preference) {

@@ -67,7 +67,8 @@ const ASSERT = {
     const pinnedMoves = fen => legalMoves(parseFen(fen)).filter(m => m.from[0] === 1 && m.from[1] === 4).length;
     if (pinnedMoves(startFen) !== 0) f.push('knight on e7 has legal moves in the start position (should be pinned)');
     if (pinnedMoves(after[0]) !== 0) f.push('knight on e7 has legal moves after 1.Kf2 (should still be pinned)');
-    if (pinnedMoves(after[1]) === 0) f.push('knight on e7 still has no legal moves after the king leaves the e-file');
+    const unpinned = parseFen(after[1]); unpinned.turn = 1; // Black to move after 2.Kd8 is not played here: test the knight on Black's turn
+    if (legalMoves(unpinned).filter(m => m.from[0] === 1 && m.from[1] === 4).length === 0) f.push('knight on e7 still has no legal moves after the king leaves the e-file');
     return f;
   },
   'skewer': ({ after }) => [

@@ -9,3 +9,4 @@ node tests/engine.test.js
 python3 build.py tests/.page.html >/dev/null
 { printf '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>'; cat tests/.page.html; printf '</body></html>'; } > tests/.preview.html
 node tests/e2e.js
+node tests/e2e_content.js

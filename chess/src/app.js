@@ -1,6 +1,7 @@
 /* ================= APP ================= */
 (function () {
-  const GLYPH = { K: '♚', Q: '♛', R: '♜', B: '♝', N: '♞', P: '♟' };
+  // U+FE0E asks for the plain text glyph, so no font swaps in a colour emoji (which ignores CSS colour).
+  const GLYPH = { K: '♚\uFE0E', Q: '♛\uFE0E', R: '♜\uFE0E', B: '♝\uFE0E', N: '♞\uFE0E', P: '♟\uFE0E' };
   const NAME = { K: 'King', Q: 'Queen', R: 'Rook', B: 'Bishop', N: 'Knight', P: 'Pawn' };
   const INFO = {
     K: ['King', 'Moves one square in any direction. It can never move into check. Once per game it can castle with a rook. Lose it and you lose the game.'],

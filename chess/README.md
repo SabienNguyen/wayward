@@ -4,6 +4,8 @@ A single-page chess game for learning. Play friends online, play Claude, or play
 
 It is independent of the Wayward app: nothing here is imported by `src/` or built by Vite.
 
+Published as a claude.ai artifact: <https://claude.ai/artifact/UVRzCWTu8MgWmeoZy6cVYB>
+
 ## Layout
 
 | Path | What it is |
@@ -33,3 +35,8 @@ The page runs as a claude.ai artifact and declares three runtime capabilities. E
 - `db`: online games live in the `games` collection. Each game document holds the `white`/`black` seats (a viewer id or `"claude"`), the move list in UCI notation, its status and its result. Every viewer replays the moves through the engine. Each player's progress is stored privately at `data/users/<id>/stats`.
 - `user`: identifies seats and shows player names.
 - `sample`: powers the tutor, and Claude as an opponent. Claude is given the legal moves and the engine's top candidates, and its reply is checked against the legal list.
+
+## Curriculum
+
+- `curriculum/lessons.json`: 14 lessons, each with a start position, a line in UCI notation and per-move notes. They cover piece movement, special moves, four openings (Italian, Ruy Lopez, Queen's Gambit, Sicilian), forks, pins, skewers, discovered attacks, back-rank mate, basic mates, and the opposition. `check_lessons.js` replays each line and checks what each lesson claims, such as forks, mates and double check.
+- `curriculum/puzzles.json`: 30 puzzles (10 mate-in-1, 10 mate-in-2, 10 win-material), harvested from engine games by `harvest.js`. `verify_puzzles.js` re-proves each one from its FEN with its own solver: a unique first move, every defence mated, or a material margin that holds at depth 3 and 4.
