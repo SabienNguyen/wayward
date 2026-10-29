@@ -4,6 +4,7 @@ set -e
 cd "$(dirname "$0")/.."
 python3 build.py
 node tests/engine.test.js
+node tests/brain.test.js
 [ -f curriculum/check_lessons.js ] && node curriculum/check_lessons.js | tail -2
 [ -f curriculum/verify_puzzles.js ] && node curriculum/verify_puzzles.js | tail -2
 python3 build.py tests/.page.html >/dev/null
