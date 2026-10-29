@@ -37,8 +37,8 @@ bash tests/run.sh         # build + engine, curriculum and browser tests
 | Casual | reference, 2 ply, some randomness | |
 | Club | reference, 3 ply | |
 | Expert | Brain, 0.5 s per move | beat the reference engine 12–0 at 0.3 s per move against 3-ply |
-| Master | Brain, 2 s per move | Brain at 1 s per move beat 4-ply reference 12–0 |
-| Grandmaster | Brain, 5 s per move | |
+| Master | Brain, 2 s per move | scored 7.5/8 against Expert; Brain at 1 s per move beat 4-ply reference 12–0 |
+| Grandmaster | Brain, 5 s per move | scored 6.5/8 against Master |
 
 `tests/engine.test.js` runs perft on the standard start position, Kiwipete and positions 3–5 against their published node counts.
 
