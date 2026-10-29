@@ -1,0 +1,348 @@
+[
+  {
+    "id": "m1-01",
+    "mate": 1,
+    "sfen": "+R1gk1l3/2sg1+S3/9/9/9/9/9/9/7K1 b G 1",
+    "solution": [
+      "G*5a"
+    ],
+    "line": [
+      "G*5a"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-02",
+    "mate": 1,
+    "sfen": "+Spkr5/g4+R3/3g5/9/9/9/9/6K2/9 b BG 1",
+    "solution": [
+      "G*7b"
+    ],
+    "line": [
+      "G*7b"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-03",
+    "mate": 1,
+    "sfen": "1+R7/b8/k2S5/3P5/9/B8/3K5/9/9 b LP 1",
+    "solution": [
+      "L*9e"
+    ],
+    "line": [
+      "L*9e"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-04",
+    "mate": 1,
+    "sfen": "1+Rb6/9/k1b6/9/9/9/9/8K/9 b RG 1",
+    "solution": [
+      "R*9b"
+    ],
+    "line": [
+      "R*9b"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-05",
+    "mate": 1,
+    "sfen": "1+Rsk5/6S2/2+S6/4S4/9/9/9/9/4K4 b BG 1",
+    "solution": [
+      "G*6b"
+    ],
+    "line": [
+      "G*6b"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-06",
+    "mate": 1,
+    "sfen": "1+Sn6/k8/p8/s8/9/9/9/8K/9 b G 1",
+    "solution": [
+      "G*8b"
+    ],
+    "line": [
+      "G*8b"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-07",
+    "mate": 1,
+    "sfen": "1B1kpl3/S4L3/1n3G3/9/9/9/9/9/2K6 b G 1",
+    "solution": [
+      "G*7b"
+    ],
+    "line": [
+      "G*7b"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-08",
+    "mate": 1,
+    "sfen": "1G1B5/s8/k8/ng7/9/9/9/9/1K7 b SP 1",
+    "solution": [
+      "S*8b"
+    ],
+    "line": [
+      "S*8b"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-09",
+    "mate": 1,
+    "sfen": "1g1p5/3k5/5s3/2Rg+R4/9/9/9/7K1/9 b S 1",
+    "solution": [
+      "S*5a"
+    ],
+    "line": [
+      "S*5a"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-10",
+    "mate": 1,
+    "sfen": "1k1b+S4/ll1G5/P8/1G7/9/9/9/9/1K7 b RG 1",
+    "solution": [
+      "R*7a"
+    ],
+    "line": [
+      "R*7a"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-11",
+    "mate": 1,
+    "sfen": "1k1b5/9/+B2P5/G8/9/9/9/6K2/9 b RL 1",
+    "solution": [
+      "R*7a"
+    ],
+    "line": [
+      "R*7a"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m1-12",
+    "mate": 1,
+    "sfen": "1k1g5/9/9/3B5/9/9/9/9/8K b RG 1",
+    "solution": [
+      "G*8b"
+    ],
+    "line": [
+      "G*8b"
+    ],
+    "hint": "The answer comes from your hand, and it must leave the king no safe square.",
+    "explain": "The dropped piece gives check. Every square the king could step to is covered or occupied, and no Gote piece can capture the dropped piece or block the check."
+  },
+  {
+    "id": "m3-01",
+    "mate": 3,
+    "sfen": "+B1k6/9/1sg6/2N6/9/9/K8/9/9 b S 1",
+    "solution": [
+      "S*6b",
+      "9a7c",
+      "7c8b"
+    ],
+    "line": [
+      "S*6b",
+      "7a7b",
+      "9a7c",
+      "7b8a",
+      "7c8b"
+    ],
+    "hint": "Every move in the line is a check, so look for the first check that no defence can escape.",
+    "explain": "Only this first move forces mate in three. Each later move is a check, and the king runs out of squares by the third attacking move."
+  },
+  {
+    "id": "m3-02",
+    "mate": 3,
+    "sfen": "+R3r4/4p4/P1k6/3sl4/2P6/5R3/2K6/9/9 b 2S 1",
+    "solution": [
+      "S*7d",
+      "9a8b",
+      "4f9f"
+    ],
+    "line": [
+      "S*7d",
+      "7c8d",
+      "9a8b",
+      "8d9d",
+      "4f9f"
+    ],
+    "hint": "Every move in the line is a check, so look for the first check that no defence can escape.",
+    "explain": "Only this first move forces mate in three. Each later move is a check, and the king runs out of squares by the third attacking move."
+  },
+  {
+    "id": "m3-03",
+    "mate": 3,
+    "sfen": "1bk6/2s1S4/3p5/+S3+R4/9/9/K8/9/9 b BL 1",
+    "solution": [
+      "B*9c",
+      "5b5a",
+      "L*6b"
+    ],
+    "line": [
+      "B*9c",
+      "7a6b",
+      "5b5a",
+      "6b6a",
+      "L*6b"
+    ],
+    "hint": "Every move in the line is a check, so look for the first check that no defence can escape.",
+    "explain": "Only this first move forces mate in three. Each later move is a check, and the king runs out of squares by the third attacking move."
+  },
+  {
+    "id": "m3-04",
+    "mate": 3,
+    "sfen": "1k1s5/9/9/+B8/9/9/9/9/3K5 b RG 1",
+    "solution": [
+      "R*8c",
+      "8c7c+",
+      "G*8b"
+    ],
+    "line": [
+      "R*8c",
+      "8a7a",
+      "8c7c+",
+      "7a8a",
+      "G*8b"
+    ],
+    "hint": "Every move in the line is a check, so look for the first check that no defence can escape.",
+    "explain": "Only this first move forces mate in three. Each later move is a check, and the king runs out of squares by the third attacking move."
+  },
+  {
+    "id": "m3-05",
+    "mate": 3,
+    "sfen": "1k2S4/3p5/2+S6/2L6/9/9/9/4K4/9 b 2B 1",
+    "solution": [
+      "B*7b",
+      "B*8b",
+      "7c8c"
+    ],
+    "line": [
+      "B*7b",
+      "8a9a",
+      "B*8b",
+      "9a9b",
+      "7c8c"
+    ],
+    "hint": "Every move in the line is a check, so look for the first check that no defence can escape.",
+    "explain": "Only this first move forces mate in three. Each later move is a check, and the king runs out of squares by the third attacking move."
+  },
+  {
+    "id": "m3-06",
+    "mate": 3,
+    "sfen": "1l1G5/k8/2+R6/N1b6/9/9/9/3K5/9 b N 1",
+    "solution": [
+      "N*8d",
+      "7c9c",
+      "9c9b"
+    ],
+    "line": [
+      "N*8d",
+      "9b9a",
+      "7c9c",
+      "7d9b",
+      "9c9b"
+    ],
+    "hint": "It can help to give up a piece, if every defence still runs into a check.",
+    "explain": "The first move gives up a piece, but each defence still allows a check. Mate comes on the third attacking move, and no shorter mate exists."
+  },
+  {
+    "id": "m3-07",
+    "mate": 3,
+    "sfen": "1R7/2kgR4/r1n6/N8/3P5/9/8K/9/9 b RS 1",
+    "solution": [
+      "R*8b",
+      "8b6b",
+      "6b6d+"
+    ],
+    "line": [
+      "R*8b",
+      "7b6c",
+      "8b6b",
+      "6c7d",
+      "6b6d+"
+    ],
+    "hint": "Every move in the line is a check, so look for the first check that no defence can escape.",
+    "explain": "Only this first move forces mate in three. Each later move is a check, and the king runs out of squares by the third attacking move."
+  },
+  {
+    "id": "m3-08",
+    "mate": 3,
+    "sfen": "1S1p5/3sL4/1k1n5/1s2S4/2+R6/9/9/9/1K7 b G 1",
+    "solution": [
+      "G*7d",
+      "7e8d",
+      "S*9b"
+    ],
+    "line": [
+      "G*7d",
+      "8c8b",
+      "7e8d",
+      "8b9a",
+      "S*9b"
+    ],
+    "hint": "Every move in the line is a check, so look for the first check that no defence can escape.",
+    "explain": "Only this first move forces mate in three. Each later move is a check, and the king runs out of squares by the third attacking move."
+  },
+  {
+    "id": "m3-09",
+    "mate": 3,
+    "sfen": "1S7/1P7/k8/1n7/P8/9/2K6/9/9 b RB 1",
+    "solution": [
+      "R*7c",
+      "7c7b+",
+      "8a9b+"
+    ],
+    "line": [
+      "R*7c",
+      "9c8b",
+      "7c7b+",
+      "8b9c",
+      "8a9b+"
+    ],
+    "hint": "Every move in the line is a check, so look for the first check that no defence can escape.",
+    "explain": "Only this first move forces mate in three. Each later move is a check, and the king runs out of squares by the third attacking move."
+  },
+  {
+    "id": "m3-10",
+    "mate": 3,
+    "sfen": "2+B6/1gs6/k8/9/+B8/2P6/9/9/2K6 b SL 1",
+    "solution": [
+      "S*8d",
+      "L*9d",
+      "9d9c"
+    ],
+    "line": [
+      "S*8d",
+      "9c9b",
+      "L*9d",
+      "8b9c",
+      "9d9c"
+    ],
+    "hint": "Every move in the line is a check, so look for the first check that no defence can escape.",
+    "explain": "Only this first move forces mate in three. Each later move is a check, and the king runs out of squares by the third attacking move."
+  }
+]

@@ -1,0 +1,223 @@
+<title>Shogi Dojo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/*@@CSS@@*/
+/*@@EXTRA@@*/
+</style>
+
+<div class="wrap" id="app">
+  <header>
+    <div>
+      <div class="brand"><h1>Shogi Dojo</h1><span class="jp">将棋道場</span></div>
+      <p>Play friends online, Claude, or a machine-learned computer. A Claude tutor, lessons and mating puzzles help you get better.</p>
+    </div>
+    <div class="controls">
+      <label for="mode">Play
+        <select id="mode">
+          <option value="ai">vs Computer</option>
+          <option value="claude">vs Claude</option>
+          <option value="pvp">Pass and play</option>
+          <option value="online">Online with people</option>
+        </select>
+      </label>
+      <label for="level">Computer
+        <select id="level"></select>
+      </label>
+      <button class="btn primary" id="newBtn" type="button">New game</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <section class="play" aria-label="Board">
+      <div class="gamebar">
+        <span class="chip" id="modeChip">vs Computer</span>
+        <span class="gamebar-title" id="onlineGameBar" hidden><span id="onlineGameTitle"></span></span>
+        <span class="spacer"></span>
+        <button class="btn small" id="hintBtn" type="button">Hint</button>
+        <button class="btn small" id="undoBtn" type="button">Undo</button>
+        <button class="btn small" id="resignBtn" type="button" hidden>Resign</button>
+        <button class="btn small primary" id="returnBtn" type="button" hidden>Back to my game</button>
+      </div>
+      <div class="stand" id="standTop"><div class="who" id="whoTop"></div><div class="hand" id="handTop"></div></div>
+      <div class="board-wrap">
+        <div class="files" id="files"></div><div></div>
+        <div class="board"><div class="grid" id="grid"></div></div>
+        <div class="ranks" id="ranks"></div>
+      </div>
+      <div class="stand" id="standBot"><div class="who" id="whoBot"></div><div class="hand" id="handBot"></div></div>
+      <div class="status">
+        <div class="turnline"><span class="msg" id="msg"></span><span class="eyebrow" id="moveNo"></span></div>
+        <div class="evalline" id="evalLine" hidden></div>
+        <div class="says" id="claudeSays" hidden><span class="says-who">Claude</span><span id="claudeSaysText"></span></div>
+        <div class="coach" id="coach"></div>
+        <div class="toggles">
+          <label class="chk" for="labels"><input type="checkbox" id="labels" checked> English letters on pieces</label>
+          <label class="chk" for="showEval"><input type="checkbox" id="showEval"> Show evaluation</label>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="tabs" role="tablist">
+        <button role="tab" data-tab="tutor" aria-selected="true" type="button">Tutor</button>
+        <button role="tab" data-tab="online" aria-selected="false" type="button">Online</button>
+        <button role="tab" data-tab="puzzles" aria-selected="false" type="button">Puzzles</button>
+        <button role="tab" data-tab="lessons" aria-selected="false" type="button">Lessons</button>
+        <button role="tab" data-tab="pieces" aria-selected="false" type="button">Pieces</button>
+        <button role="tab" data-tab="rules" aria-selected="false" type="button">Rules</button>
+        <button role="tab" data-tab="moves" aria-selected="false" type="button">Moves</button>
+      </div>
+
+      <div class="tabpane" id="pane-tutor">
+        <h2>Your tutor</h2>
+        <p class="muted">Claude sees the board, the move list and the engine's analysis, and coaches you from there.</p>
+        <p class="note" id="tutorNoClaude" hidden>Claude isn't reachable from this view, so the tutor falls back to engine analysis. Allow this page to ask Claude (from its permissions) to get explanations.</p>
+        <div class="row-actions">
+          <button class="btn" type="button" id="tExplain">Explain this position</button>
+          <button class="btn" type="button" id="tMove">What should I play?</button>
+          <button class="btn primary" type="button" id="tReview">Review my game</button>
+        </div>
+        <div id="reviewOut"></div>
+        <div class="tutorlog" id="tutorLog" aria-live="polite"></div>
+        <form class="askrow" id="tutorForm">
+          <label class="sr" for="tutorInput">Ask the tutor</label>
+          <input id="tutorInput" type="text" placeholder="Ask anything, e.g. how do I defend against that bishop?" autocomplete="off">
+          <button class="btn primary" type="submit" id="tutorAsk">Ask</button>
+          <button class="btn" type="button" id="tutorStop" hidden>Stop</button>
+        </form>
+        <div class="row-actions"><button class="linkbtn" type="button" id="tClear">Clear conversation</button></div>
+        <h3>Your progress</h3>
+        <div id="progress"></div>
+        <h3>Computer opponents</h3>
+        <ul class="levels" id="levelList"></ul>
+        <details class="mlnote"><summary>How the computer learned</summary><div>
+          <p>Each machine-learned opponent is a logistic-regression model that predicts who will win from the pieces on the board and in hand. It learned only from recorded games and their results, never from an engine's scores.</p>
+          <p>Head-to-head results (12–16 games each, same 2-move search): Novice beat Newborn 12–0, Apprentice beat Novice 8–4, Veteran beat Apprentice 16–0. A model trained on 300 games scored worse than the 40-game one, so it was left out. More data doesn't always mean better play.</p>
+          <p>The Classic levels use hand-tuned piece values and are still stronger than every learned model.</p>
+        </div></details>
+        <p class="muted small">The machine-learned opponents all search the same way. They differ only in how they judge a position, which each one learned by studying recorded games and who won them. More games studied means more experience.</p>
+      </div>
+
+      <div class="tabpane" id="pane-online" hidden>
+        <h2>Play people online</h2>
+        <div id="onlineOff" class="note">Online play needs you to be signed in to claude.ai with access to this page. Share the page with a friend from its Share menu so they can join.</div>
+        <div id="onlineOn" hidden>
+          <p class="muted">Create a game, then share this page. Anyone with access can take the open seat, and everyone else can watch live. You can also seat Claude as your opponent.</p>
+          <div class="create">
+            <label for="newTitle">Name<input id="newTitle" type="text" maxlength="60" placeholder="Friendly game"></label>
+            <label for="newSide">You play
+              <select id="newSide"><option value="sente">Sente ▲ (first)</option><option value="gote">Gote △</option><option value="random">Random</option></select>
+            </label>
+            <label for="newOpp">Opponent
+              <select id="newOpp"><option value="anyone">Anyone who joins</option><option value="claude">Claude</option></select>
+            </label>
+            <button class="btn primary" type="button" id="createGame">Create game</button>
+          </div>
+          <p class="lobbymsg" id="lobbyMsg" role="status"></p>
+          <div id="lobbyLists"></div>
+        </div>
+      </div>
+
+      <div class="tabpane" id="pane-puzzles" hidden>
+        <h2>Mating puzzles</h2>
+        <p class="muted">Tsume-shogi: you play Sente, and every move must be check. These train the eye for drops and sacrifices that win games. <span id="puzzleProgress"></span></p>
+        <div class="row-actions" id="puzzleActions" hidden>
+          <button class="btn" type="button" id="puzzleRetry">Restart</button>
+          <button class="btn" type="button" id="puzzleShow">Show solution</button>
+          <button class="btn primary" type="button" id="puzzleNext">Next puzzle</button>
+        </div>
+        <div id="puzzleFeedback"></div>
+        <div id="puzzleList"></div>
+      </div>
+
+      <div class="tabpane" id="pane-lessons" hidden>
+        <div id="lessonBody"></div>
+      </div>
+
+      <div class="tabpane" id="pane-pieces" hidden></div>
+
+      <div class="tabpane" id="pane-rules" hidden>
+        <h2>How shogi works</h2>
+        <p>Shogi is chess's Japanese cousin. Two players, 9×9 board, 20 pieces each. The big twist: pieces you capture change sides and can be dropped back onto the board as your own.</p>
+        <details open><summary>1. The goal</summary><div>
+          <p>Checkmate the opponent's king: attack it so that no move can save it. There's no stalemate draw. A player with no legal move simply loses.</p>
+          <p>Sente (▲, "black") moves first and sits at the bottom. Gote (△, "white") sits at the top. Both sides' pieces are the same colour; you tell them apart by which way the point faces.</p>
+        </div></details>
+        <details><summary>2. The pieces</summary><div>
+          <p>Tap any piece below to study it. Most pieces move mainly forward, so attacks go one way and defence matters.</p>
+          <div class="allpieces" id="allPieces"></div>
+        </div></details>
+        <details><summary>3. Capturing and drops</summary><div>
+          <ul>
+            <li>Every piece captures exactly the way it moves. Pawns capture straight ahead.</li>
+            <li>A captured piece goes onto your stand (komadai). It loses any promotion.</li>
+            <li>On your turn you can either move a piece <em>or</em> drop one from your stand onto any empty square.</li>
+            <li>Drops can give check, block a check, or fork two pieces. They're the heart of shogi tactics.</li>
+          </ul>
+        </div></details>
+        <details><summary>4. Promotion</summary><div>
+          <ul>
+            <li>The promotion zone is the far three ranks (the opponent's starting area).</li>
+            <li>A piece may promote when it moves into, out of, or within that zone. You choose.</li>
+            <li>Promoted pieces flip over and show red characters. Silver, knight, lance and pawn become gold-movers. Rook becomes the Dragon, bishop becomes the Horse.</li>
+            <li>Kings and golds never promote. Dropped pieces always land unpromoted.</li>
+            <li>Promotion is forced when a piece would otherwise never move again: a pawn or lance on the last rank, a knight on the last two.</li>
+          </ul>
+        </div></details>
+        <details><summary>5. Drop restrictions</summary><div>
+          <ul>
+            <li><b>Nifu (two pawns):</b> you can't have two unpromoted pawns of your own in the same file.</li>
+            <li><b>Dead squares:</b> no dropping a pawn or lance on the last rank, or a knight on the last two ranks.</li>
+            <li><b>Uchifuzume:</b> a pawn drop may give check, but it may not give checkmate. Checkmating with a moved pawn is fine.</li>
+          </ul>
+        </div></details>
+        <details><summary>6. Check, repetition and notation</summary><div>
+          <ul>
+            <li>When your king is attacked you must remove the threat: move the king, capture the attacker, or block it (a drop counts).</li>
+            <li>If the same position comes up four times, it's a draw (sennichite).</li>
+            <li>Notation: piece letter, then <span class="nt">-</span> move, <span class="nt">x</span> capture, <span class="nt">*</span> drop, the square, then <span class="nt">+</span> promote or <span class="nt">=</span> decline. Files run 9→1 from Sente's left; ranks a→i from the top. So <span class="nt">P-7f</span> pushes the pawn on file 7 to rank f.</li>
+          </ul>
+        </div></details>
+      </div>
+
+      <div class="tabpane" id="pane-moves" hidden>
+        <h2>Game record</h2>
+        <p class="eyebrow" style="margin-bottom:12px">▲ Sente · △ Gote</p>
+        <ol class="log" id="log"></ol>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="overlay" id="promoDlg" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
+    <h2 id="promoTitle">Promote this piece?</h2>
+    <p>Your piece moved through the promotion zone (the far three ranks). Promoting usually makes it stronger, but a silver, knight or lance sometimes stays more useful unpromoted.</p>
+    <div class="choices" id="promoChoices"></div>
+  </div>
+</div>
+
+<div class="overlay" id="endDlg" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="endTitle">
+    <h2 id="endTitle"></h2>
+    <p id="endText"></p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn primary" id="endReview" type="button">Review with the tutor</button>
+      <button class="btn" id="endNew" type="button">New game</button>
+      <button class="btn" id="endUndo" type="button">Take back</button>
+      <button class="btn" id="endClose" type="button">Look at the board</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/*@@ENGINE@@*/
+/*@@ML@@*/
+const WEIGHTS = /*@@WEIGHTS@@*/;
+const LESSONS = /*@@LESSONS@@*/;
+const PUZZLES = /*@@PUZZLES@@*/;
+/*@@APP@@*/
+</script>

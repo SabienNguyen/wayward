@@ -1,0 +1,336 @@
+[
+ {
+  "id": "opening-principles",
+  "title": "Opening principles",
+  "summary": "Move pawns to open lines for your rook and bishop, and get your king to safety early.",
+  "body": [
+   "The opening is a race for space and safety. Every move should have a purpose.",
+   "Pawns in front of your rook and bishop open lines for them. Use those lines.",
+   "Your king starts in the middle of the back rank. Plan to move it into a castle soon.",
+   "This short line is a normal start. Each pawn push shows one idea."
+  ],
+  "start": "startpos",
+  "moves": [
+   "7g7f",
+   "3c3d",
+   "2g2f",
+   "8c8d"
+  ],
+  "notes": {
+   "0": "Sente opens the seventh file. This frees the bishop's diagonal.",
+   "1": "Gote mirrors the idea on the other side.",
+   "2": "The pawn on the second file opens a line for the rook.",
+   "3": "Both sides now have open lines. Next, decide where your king will live."
+  },
+  "key": "Open lines for your own pieces before you attack, and plan your king's safety early."
+ },
+ {
+  "id": "bishop-diagonal",
+  "title": "The bishop's diagonal",
+  "summary": "Once the seventh-file pawn moves, the bishop on 8h can use the long diagonal.",
+  "body": [
+   "The bishop moves on diagonals only. Look at its diagonals before you move it.",
+   "Your bishop starts on 8h. Its diagonal runs through 7g, 6f and on toward the centre.",
+   "Moving the pawn off 7g clears the first square of that diagonal.",
+   "Check where the bishop lands. It should attack something useful, not just sit."
+  ],
+  "start": "startpos",
+  "moves": [
+   "7g7f",
+   "3c3d",
+   "8h7g"
+  ],
+  "notes": {
+   "2": "The bishop steps to 7g. Its diagonal now runs toward Gote's side of the board."
+  },
+  "key": "Clear the square in front of the bishop, then place it on the diagonal it needs."
+ },
+ {
+  "id": "bishops-face-off",
+  "title": "Bishops face off",
+  "summary": "When two bishops share a diagonal, the side to move can capture first, so count the recaptures.",
+  "body": [
+   "After the bishop reaches 7g, Gote's bishop on 2b looks down the same diagonal.",
+   "The diagonal is open, so either bishop can take the other.",
+   "Whoever captures first wins the bishop unless the other side can recapture.",
+   "Here Gote takes first, but Sente's knight on 8i can jump to 7g and recapture, so the trade is even."
+  ],
+  "start": "startpos",
+  "moves": [
+   "7g7f",
+   "3c3d",
+   "8h7g",
+   "2b7g",
+   "8i7g"
+  ],
+  "notes": {
+   "3": "Gote takes the bishop on 7g with its own bishop. Sente is down a bishop until it recaptures.",
+   "4": "The knight from 8i jumps to 7g and takes back. Bishops are traded evenly."
+  },
+  "key": "Before you put a piece on a shared line, count the attackers and defenders of that square."
+ },
+ {
+  "id": "static-vs-ranging-rook",
+  "title": "Static rook and ranging rook",
+  "summary": "A static rook stays on its home file, while a ranging rook slides sideways toward the centre.",
+  "body": [
+   "The rook on 2h can stay where it is. This is a static rook plan.",
+   "Or it can slide sideways to attack. This is a ranging rook plan.",
+   "The two plans lead to very different castles and attacking chances.",
+   "This line shows the rook sliding along the 8th rank of the board from 2h to 5h."
+  ],
+  "start": "startpos",
+  "moves": [
+   "7g7f",
+   "3c3d",
+   "2g2f",
+   "8c8d",
+   "2h5h"
+  ],
+  "notes": {
+   "4": "The rook moves from 2h to 5h along the rank. The path is clear, so the move is legal."
+  },
+  "key": "Choose your rook plan early, then build the castle and attack that match it."
+ },
+ {
+  "id": "castle-walk-anaguma",
+  "title": "The king walks to the corner",
+  "summary": "An anaguma castle puts the king deep in a corner, and this demo shows only the king walking there.",
+  "body": [
+   "A real anaguma is built around a king in the corner, with gold and silver pieces around it.",
+   "This lesson shows only the king's walk along the bottom rank to the 1i corner.",
+   "Corners are hard to attack. Few pieces can reach them, and the king has fewer escape squares to watch."
+  ],
+  "start": "4k4/9/9/9/9/9/9/9/4K4 b - 1",
+  "moves": [
+   "5i4i",
+   "5a4a",
+   "4i3i",
+   "4a3a",
+   "3i2i",
+   "3a2a",
+   "2i1i"
+  ],
+  "notes": {
+   "0": "The king leaves the centre of the back rank.",
+   "6": "The king reaches 1i, the corner."
+  },
+  "key": "A king in a corner is hard to attack, but a real castle also needs its gold and silver pieces."
+ },
+ {
+  "id": "castle-principles",
+  "title": "Castles and why they matter",
+  "summary": "Yagura, Mino and the boat castle are built from gold and silver generals around the king.",
+  "body": [
+   "A castle is a group of pieces around the king. The gold and silver generals do most of the work.",
+   "Yagura and Mino are two popular castles. Each one has its own shape and its own strengths.",
+   "The boat castle, funa-gakoi, is quick to build, but the king is less protected than in the stronger castles.",
+   "Every castle has a weak side. Learn where yours is, and where your opponent's is."
+  ],
+  "start": "startpos",
+  "moves": [
+   "7g7f",
+   "3c3d"
+  ],
+  "notes": {
+   "1": "Both sides have started a plan. Castles come next."
+  },
+  "key": "A castle works only if its gold and silver generals stay together and the king stays inside."
+ },
+ {
+  "id": "yagura-castle",
+  "title": "Building the Yagura castle",
+  "summary": "The classic Static Rook fortress: king on 8h behind a wall of gold, gold and silver.",
+  "body": [
+   "Yagura (矢倉, \"fortress tower\") is the traditional castle for Static Rook players, where your rook stays on its home file.",
+   "The finished shape has the king on 8h, golds on 7h and 6g, and a silver on 7g. The pawns on 7f and 6f sit in front like a roof.",
+   "It is very solid against attacks from the front, but it takes many moves to build, and it is weaker against attacks on the edge and from the side.",
+   "Gote's moves here are quiet developing moves so you can focus on Sente's castle."
+  ],
+  "start": "startpos",
+  "moves": [
+   "7g7f",
+   "8c8d",
+   "6g6f",
+   "3c3d",
+   "6i7h",
+   "8d8e",
+   "4i5h",
+   "6a5b",
+   "5h6g",
+   "4a3b",
+   "7i6h",
+   "7a6b",
+   "6h7g",
+   "5a4a",
+   "8h7i",
+   "5c5d",
+   "7i6h",
+   "6b5c",
+   "5i6i",
+   "9c9d",
+   "6i7i",
+   "7c7d",
+   "7i8h",
+   "1c1d"
+  ],
+  "notes": {
+   "0": "Open the bishop diagonal and make room for the silver to come up to 7g later.",
+   "2": "Pushing the 6th-file pawn gives the gold a square on 6g.",
+   "4": "The left gold steps up to 7h, next to where the king will live.",
+   "6": "The right gold starts its trip toward the king.",
+   "8": "Gold to 6g. Two golds now guard the castle's front.",
+   "10": "The silver heads for 7g by way of 6h.",
+   "12": "Silver on 7g: the wall is complete.",
+   "14": "The bishop gets out of the king's way, first to 7i, then to 6h.",
+   "18": "Now the king walks over: 6i, 7i, then 8h.",
+   "22": "King on 8h. The Yagura castle is finished: king 8h, golds 7h and 6g, silver 7g."
+  },
+  "key": "Yagura = king 8h, golds 7h and 6g, silver 7g. Strong in front, slow to build."
+ },
+ {
+  "id": "mino-castle",
+  "title": "Building the Mino castle",
+  "summary": "The Ranging Rook player's favourite castle: quick to build and hard to break from the side.",
+  "body": [
+   "When you move your rook to the left side of the board (Ranging Rook), the right side is free for your king. The Mino castle (美濃囲い) uses that space.",
+   "The finished shape is king on 2h, silver on 3h, and golds on 4i and 5h. It takes only a few moves, which is why Ranging Rook players love it.",
+   "It holds up well against attacks from the side, but the head of the king (the squares above it) is a weak spot to watch.",
+   "Gote's moves here are quiet developing moves so you can focus on Sente's castle."
+  ],
+  "start": "startpos",
+  "moves": [
+   "7g7f",
+   "3c3d",
+   "6g6f",
+   "8c8d",
+   "2h6h",
+   "8d8e",
+   "5i4h",
+   "6a5b",
+   "4h3h",
+   "5a4b",
+   "3h2h",
+   "4b3b",
+   "3i3h",
+   "7a6b",
+   "6i5h",
+   "7c7d"
+  ],
+  "notes": {
+   "0": "Open the bishop diagonal.",
+   "2": "The 6th-file pawn makes room for the rook's new home.",
+   "4": "Ranging Rook: the rook slides from 2h to 6h. For Sente this is the Fourth File Rook (shikenbisha), the most popular Ranging Rook opening.",
+   "6": "With the rook gone, the king walks right: 4h…",
+   "8": "…then 3h…",
+   "10": "…and settles on 2h.",
+   "12": "The silver steps up to 3h, right next to the king.",
+   "14": "Gold from 6i to 5h. The Mino castle is complete: king 2h, silver 3h, golds 4i and 5h."
+  },
+  "key": "Mino = king 2h, silver 3h, golds 4i and 5h. Fast, and strong against side attacks."
+ },
+ {
+  "id": "pawn-drop-threat",
+  "title": "The pawn drop threat",
+  "summary": "A pawn dropped in front of a piece attacks it, so the piece must move or be defended.",
+  "body": [
+   "A pawn attacks the square one step in front of it.",
+   "Dropping a pawn in front of an enemy piece threatens to capture that piece.",
+   "The target must move, be defended, or deal with the pawn.",
+   "Here the gold on 5b is only defended by the king. The pawn drop puts it under attack at once."
+  ],
+  "start": "4k4/4g4/9/9/9/9/9/9/4K4 b P 1",
+  "moves": [
+   "P*5c"
+  ],
+  "notes": {
+   "0": "The pawn on 5c attacks the gold on 5b. Gote must move the gold, defend it, or deal with the pawn."
+  },
+  "key": "A pawn drop in front of a piece creates an immediate threat."
+ },
+ {
+  "id": "knight-fork",
+  "title": "Forks with the knight",
+  "summary": "A knight attacks only two squares ahead, so one knight can attack two pieces at once.",
+  "body": [
+   "A knight jumps two squares forward and one to the side. It has no other movement in front.",
+   "A knight on 4c attacks 5a and 3a. A king on 5a and a gold on 3a are both in trouble.",
+   "The king must move, so the gold on 3a falls.",
+   "Before you fork, check which two squares the knight can reach."
+  ],
+  "start": "4k1g2/9/9/9/9/9/9/9/4K4 b N 1",
+  "moves": [
+   "N*4c",
+   "5a4b",
+   "4c3a+"
+  ],
+  "notes": {
+   "0": "The knight is dropped on 4c. It checks the king on 5a and attacks the gold on 3a.",
+   "1": "The king steps to 4b. It cannot stop the knight.",
+   "2": "The knight takes the gold on 3a and promotes, since a knight on the last rank has no moves."
+  },
+  "key": "A knight fork works best when the king is forced to move and cannot protect the other piece."
+ },
+ {
+  "id": "edge-pawn-attack",
+  "title": "Edge pawn attacks",
+  "summary": "Pushing an edge pawn is slow but can break a castle, so count the tempi before you commit.",
+  "body": [
+   "Pawns on the edge files are often ignored. But they can be pushed to attack a castle.",
+   "Each push takes a move. Count whether your attack is faster than your opponent's.",
+   "This line shows two edge pawns pushed on the ninth file."
+  ],
+  "start": "startpos",
+  "moves": [
+   "9g9f",
+   "9c9d"
+  ],
+  "notes": {
+   "0": "The edge pawn on 9g moves to 9f.",
+   "1": "Gote answers with the matching edge pawn push."
+  },
+  "key": "An edge pawn attack is only useful when you can count its tempi against your opponent's defence."
+ },
+ {
+  "id": "hisshi",
+  "title": "Hisshi: the mate that can't be stopped",
+  "summary": "A quiet move that isn't check, after which mate next move cannot be prevented.",
+  "body": [
+   "In the endgame you often can't give checkmate right away. The next best thing is hisshi (必至): a move that threatens mate in such a way that no defence works.",
+   "Hisshi doesn't have to be check. That's what makes it powerful: it lets you finish the attack calmly.",
+   "It also decides races. If your opponent's king is in hisshi and yours is safe from immediate mate, you win even if they have more pieces.",
+   "Here Sente has a gold on 4b and a rook in hand. Sliding the gold to 3b is not check, but it takes away 2a and 2b from the king. Now a rook drop on the 1st file mates, and Gote has no way to stop it."
+  ],
+  "start": "8k/5G3/7l1/9/9/9/9/9/K8 b R 1",
+  "moves": [
+   "4b3b",
+   "1a1b",
+   "R*1d"
+  ],
+  "notes": {
+   "0": "G-3b. Not check, but the gold now covers 2a, 2b and 2c. The king is trapped on the 1st file, and Sente threatens a rook drop on it.",
+   "1": "Gote tries to run with K-1b. Every other move, like moving the lance, also loses to a rook drop.",
+   "2": "R*1d: the rook checks down the file, the gold covers every escape square, and nothing can block. Checkmate."
+  },
+  "key": "When you can't mate now, look for a quiet move that makes mate unstoppable."
+ },
+ {
+  "id": "drop-mate",
+  "title": "Checkmate with a drop",
+  "summary": "Many shogi games end with a piece dropped from hand right next to the enemy king.",
+  "body": [
+   "Checkmate (tsumi) is a check the king cannot escape: it can't step away, nothing can capture the checking piece, and nothing can block it.",
+   "Pieces in hand make this easy to set up, because you can drop a gold or silver right beside the king where it is protected by another of your pieces.",
+   "Here Gote's king on 6a is hemmed in by its own gold and silver. A gold dropped on 5a, protected by Sente's promoted silver on 4b, ends the game.",
+   "The Puzzles tab has many more of these. They are the best way to learn to see mates."
+  ],
+  "start": "+R1gk1l3/2sg1+S3/9/9/9/9/9/9/7K1 b G 1",
+  "moves": [
+   "G*5a"
+  ],
+  "notes": {
+   "0": "Gold drop on 5a: check. The king's own pieces block 7a, 7b and 6b, the gold covers 5b, and the promoted silver on 4b protects the gold, so the king can't take it. Checkmate."
+  },
+  "key": "Look for checks where the king has no free square and the checking piece is protected."
+ }
+]

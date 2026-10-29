@@ -1,0 +1,12 @@
+{
+  "name": "shogi-dojo",
+  "private": true,
+  "type": "commonjs",
+  "description": "Single-page shogi game with online play, a Claude tutor, lessons, puzzles and machine-learned opponents.",
+  "scripts": {
+    "build": "python3 build.py",
+    "test": "bash tests/run.sh",
+    "ml:games": "node ml/gen.js 1600",
+    "ml:fit": "node ml/fit.js"
+  }
+}
