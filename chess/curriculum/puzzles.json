@@ -1,0 +1,482 @@
+[
+  {
+    "id": "m1-01",
+    "kind": "mate1",
+    "fen": "1rb1qbr1/1pBkn1p1/2n1Rp1p/1N1p1P2/p2P2P1/5N1P/PPP3B1/R2Q2K1 w - - 1 21",
+    "solution": [
+      "e6d6"
+    ],
+    "line": [
+      "e6d6"
+    ],
+    "theme": "tactic",
+    "hint": "Look for a rook check next to the black king that a knight can defend.",
+    "explain": "Re6-d6 checks the king on d7 from the next square, and the knight on b5 defends the rook so the king cannot take it. The king has no way out: c7 is a white bishop that the same knight also defends, e6 and d8 are covered by the rook, and its own queen, knights and bishops block the rest."
+  },
+  {
+    "id": "m1-02",
+    "kind": "mate1",
+    "fen": "r1b1kb1r/N4pp1/3p3p/2p1p3/8/8/4PPPP/q1B1KB1R b kq - 4 21",
+    "solution": [
+      "a1c1"
+    ],
+    "line": [
+      "a1c1"
+    ],
+    "theme": "tactic",
+    "hint": "The black queen can take a piece on the first rank with check.",
+    "explain": "Qxc1 takes the white bishop on c1 and gives check along the first rank to the king on e1. The king cannot escape: d1 and d2 are covered by the queen, while its own pawns on e2 and f2 and its bishop on f1 block the other squares."
+  },
+  {
+    "id": "m1-03",
+    "kind": "mate1",
+    "fen": "4rk2/1p1b4/p6p/P1Pp1pr1/5q2/NQ2n3/RPP5/7K b - - 0 34",
+    "solution": [
+      "f4h4"
+    ],
+    "line": [
+      "f4h4"
+    ],
+    "theme": "tactic",
+    "hint": "The black queen has a check along an open file; look at what covers the escape squares.",
+    "explain": "Qh4 checks the king on h1 along the open h-file, and the black rook on g5 covers g1 and g2 while the queen covers h2. The white queen on b3 cannot block on h3 because the black knight on e3 stands in its path."
+  },
+  {
+    "id": "m1-04",
+    "kind": "mate1",
+    "fen": "1k2bK2/2p5/2P5/8/7p/2q1q3/8/3q4 b - - 5 66",
+    "solution": [
+      "c3h8"
+    ],
+    "line": [
+      "c3h8"
+    ],
+    "theme": "tactic",
+    "hint": "A queen reaches the far corner along a long diagonal and gives check along the eighth rank.",
+    "explain": "Qh8 checks the white king on f8 along the eighth rank. The queen covers g7 and g8, the bishop on e8 covers f7, the queen on e3 covers e7, and the king cannot take the bishop on e8 because the queen on h8 covers it along the rank."
+  },
+  {
+    "id": "m1-05",
+    "kind": "mate1",
+    "fen": "1k6/4Q3/4p3/4P1B1/2P3p1/P6r/2PR2K1/8 w - - 3 64",
+    "solution": [
+      "d2d8"
+    ],
+    "line": [
+      "d2d8"
+    ],
+    "theme": "back rank",
+    "hint": "Count the king's escape squares on the eighth rank and the squares the queen covers.",
+    "explain": "Rd8 is checkmate on the back rank: it checks the king on b8 and covers c8. The white queen on e7 covers a7, b7 and c7 along the seventh rank, and a8 stays on the rook's line once the king moves."
+  },
+  {
+    "id": "m1-06",
+    "kind": "mate1",
+    "fen": "2r4k/2p2p2/p2r1P2/P1p5/2Pp1PQ1/3P4/1R4P1/6K1 w - - 4 55",
+    "solution": [
+      "g4g7"
+    ],
+    "line": [
+      "g4g7"
+    ],
+    "theme": "tactic",
+    "hint": "Look for a queen check on the seventh rank that cannot be taken.",
+    "explain": "Qg7 checks the king on h8 and cannot be taken, because the pawn on f6 defends it. The queen also covers g8 and h7, so the king has no square to move to."
+  },
+  {
+    "id": "m1-07",
+    "kind": "mate1",
+    "fen": "3r4/pppqbppr/3p1k1p/3Pp3/6Q1/2N2N1P/PP3PP1/R1B3KR w - - 5 25",
+    "solution": [
+      "c3e4"
+    ],
+    "line": [
+      "c3e4"
+    ],
+    "theme": "tactic",
+    "hint": "A knight move gives check, and the queen and pawns cover every other square.",
+    "explain": "Ne4 gives check to the black king on f6, and the knight cannot be taken. The queen on g4 covers f5, g5 and g6, the pawn on d5 covers e6, and the black pawns on e5, f7 and g7 and the bishop on e7 block the rest."
+  },
+  {
+    "id": "m1-08",
+    "kind": "mate1",
+    "fen": "7k/1r2PP1p/7p/7P/1p1pP1P1/p7/R7/6KR w - - 1 61",
+    "solution": [
+      "f7f8q"
+    ],
+    "line": [
+      "f7f8q"
+    ],
+    "theme": "promotion",
+    "hint": "A pawn can reach the last rank with check.",
+    "explain": "f8=Q gives check along the eighth rank to the king on h8. The new queen covers g8 and g7, and the black pawn on h7 blocks the king's last square, so the position is mate."
+  },
+  {
+    "id": "m1-09",
+    "kind": "mate1",
+    "fen": "k7/1r4p1/p4p2/7p/1p4bP/2r3b1/3K2R1/8 b - - 5 69",
+    "solution": [
+      "b7d7"
+    ],
+    "line": [
+      "b7d7"
+    ],
+    "theme": "tactic",
+    "hint": "A rook can check along an open file toward the white king.",
+    "explain": "Rd7 gives check to the white king on d2 down the open d-file. The rook on c3 covers c1, c2, d3 and e3, the bishops on g3 and g4 cover e1 and e2, and d1 stays on the rook's file behind the king, so the king has no move."
+  },
+  {
+    "id": "m1-10",
+    "kind": "mate1",
+    "fen": "1R6/3N1p1k/7p/p2Q1PpP/8/2p5/5P1K/2r5 w - - 0 67",
+    "solution": [
+      "d5f7"
+    ],
+    "line": [
+      "d5f7"
+    ],
+    "theme": "tactic",
+    "hint": "Look for a queen capture on the seventh rank that also gives check.",
+    "explain": "Qxf7 captures the pawn with check along the seventh rank, and the queen also covers g7. The rook on b8 covers g8 and h8, the pawn on f5 covers g6, and the black pawn on h6 blocks the last square."
+  },
+  {
+    "id": "m2-01",
+    "kind": "mate2",
+    "fen": "4r3/3k4/7p/2b5/3pp2p/8/3K4/q7 b - - 3 70",
+    "solution": [
+      "e8b8",
+      "b8b2"
+    ],
+    "line": [
+      "e8b8",
+      "d2c2",
+      "b8b2"
+    ],
+    "theme": "tactic",
+    "hint": "Find a rook move that threatens a check on the second rank, and count the king's squares.",
+    "explain": "Rb8 threatens Rb2, which checks the king on d2 along the second rank. The king has only two legal replies, Kc2 and Ke2, and both are met by Rb2 mate, since the queen on a1 and the pawns on d4 and e4 cover the other squares."
+  },
+  {
+    "id": "m2-02",
+    "kind": "mate2",
+    "fen": "r1b1kb1r/N4pp1/3p3p/q1p1p3/8/8/3BPPPP/4KB1R b kq - 2 20",
+    "solution": [
+      "a5a1",
+      "a1c1"
+    ],
+    "line": [
+      "a5a1",
+      "d2c1",
+      "a1c1"
+    ],
+    "theme": "tactic",
+    "hint": "Look for a queen check on the first rank that has only one possible block.",
+    "explain": "Qa1 gives check along the first rank to the king on e1, and the only block is Bc1 from d2. Qxc1 is then mate: the queen covers d1 and d2, while the king's own pawns on e2 and f2 and its bishop on f1 block the other squares."
+  },
+  {
+    "id": "m2-03",
+    "kind": "mate2",
+    "fen": "1k6/4R3/8/7P/P2NB3/5K2/5P2/8 w - - 13 66",
+    "solution": [
+      "d4c6",
+      "e7a7"
+    ],
+    "line": [
+      "d4c6",
+      "b8a8",
+      "e7a7"
+    ],
+    "theme": "tactic",
+    "hint": "A knight check from c6 leaves the king two squares; find the rook check that follows.",
+    "explain": "Nc6 gives check to the king on b8 and covers a7 and d8. After Ka8 the rook jumps from e7 to a7 for mate, and after Kc8 the bishop on f5 mates along the diagonal."
+  },
+  {
+    "id": "m2-04",
+    "kind": "mate2",
+    "fen": "8/5kpp/2n5/5K2/1r6/7P/1P6/8 b - - 5 53",
+    "solution": [
+      "h7h6",
+      "g7g6"
+    ],
+    "line": [
+      "h7h6",
+      "h3h4",
+      "g7g6"
+    ],
+    "theme": "tactic",
+    "hint": "A pawn move takes a square from the white king and sets up a pawn check.",
+    "explain": "After Black's h6 the white king on f5 has lost the g5 square, and White has only two legal moves. Both are answered by g6 mate: the pawn gives check, the king on f7 covers e6 and f6, the pawn on h6 covers g5, the rook on b4 covers e4, f4 and g4, and the knight on c6 covers e5."
+  },
+  {
+    "id": "m2-05",
+    "kind": "mate2",
+    "fen": "3r3r/pppqbpp1/3pk2p/3np3/4P2Q/2N2N1P/PP3PP1/R1B3KR w - - 0 22",
+    "solution": [
+      "h4g4",
+      "c3d5"
+    ],
+    "line": [
+      "h4g4",
+      "e6f6",
+      "c3d5"
+    ],
+    "theme": "tactic",
+    "hint": "A queen check on a diagonal forces the king into a net that a knight can close.",
+    "explain": "Qg4 checks the black king on e6 along the diagonal. After Kf6 the knight captures on d5 with check, and the queen on g4 covers e6, f5, g5 and g6 so the king cannot escape; the pawn block on f5 loses to Qxf5 mate."
+  },
+  {
+    "id": "m2-06",
+    "kind": "mate2",
+    "fen": "3r4/pppqbppr/3p3p/3Ppk2/8/2N2NQP/PP3PP1/R1B3KR w - - 3 24",
+    "solution": [
+      "g3g4",
+      "c3e4"
+    ],
+    "line": [
+      "g3g4",
+      "f5f6",
+      "c3e4"
+    ],
+    "theme": "tactic",
+    "hint": "A queen check on a diagonal leaves the king one square, and a knight can finish.",
+    "explain": "Qg4 checks the black king on f5, and its only move is Kf6. Then Ne4 is mate: the knight gives check, the pawn on d5 covers e6, and the queen on g4 covers f5, g5 and g6, while the black pawns on e5, f7 and g7 and the bishop on e7 block the rest."
+  },
+  {
+    "id": "m2-07",
+    "kind": "mate2",
+    "fen": "1rb5/ppp1N1kr/7p/4p2B/1P2qP2/1Q2B3/P5P1/R4RK1 w - - 0 31",
+    "solution": [
+      "b3f7",
+      "f7f8"
+    ],
+    "line": [
+      "b3f7",
+      "g7h8",
+      "f7f8"
+    ],
+    "theme": "tactic",
+    "hint": "A queen check on the seventh rank is protected by a bishop.",
+    "explain": "Qf7 checks the black king on g7, and the bishop on h5 protects the queen so the king cannot take it. The king's only move is to h8, and then Qf8 is mate, since the queen covers g8 and g7 while the black rook on h7 blocks the last square."
+  },
+  {
+    "id": "m2-08",
+    "kind": "mate2",
+    "fen": "4r3/ppp1N2k/7p/8/1P3R2/1P2B3/6P1/R5K1 w - - 1 36",
+    "solution": [
+      "f4f7",
+      "e3d4"
+    ],
+    "line": [
+      "f4f7",
+      "h7h8",
+      "e3d4"
+    ],
+    "theme": "tactic",
+    "hint": "A rook check on the seventh rank drives the king into the corner.",
+    "explain": "Rf7 checks the king on h7 along the seventh rank, and Kh8 is the only reply. Bd4 is then mate on the long diagonal: the rook on f7 covers g7 and h7, and the knight on e7 covers g8."
+  },
+  {
+    "id": "m2-09",
+    "kind": "mate2",
+    "fen": "1r3bnr/k3ppp1/p3b3/1p2P2p/1B1P3P/5NQ1/5PP1/1qN1KB1R b K - 4 33",
+    "solution": [
+      "b1c1",
+      "e6c4"
+    ],
+    "line": [
+      "b1c1",
+      "e1e2",
+      "e6c4"
+    ],
+    "theme": "tactic",
+    "hint": "A queen can capture on the first rank with check; then look for a bishop move that finishes.",
+    "explain": "Qxc1 takes the white knight with check along the first rank, and Ke2 is the only legal reply. Bc4 is then mate on the c4 to e2 diagonal: the queen on c1 covers d1, d2, e1 and e3, and the bishop on c4 covers d3."
+  },
+  {
+    "id": "m2-10",
+    "kind": "mate2",
+    "fen": "6k1/3N1p2/4b2p/p1p2BpP/6P1/8/1R3PQK/2r5 w - - 1 60",
+    "solution": [
+      "g2a8",
+      "a8f8"
+    ],
+    "line": [
+      "g2a8",
+      "g8g7",
+      "a8f8"
+    ],
+    "theme": "tactic",
+    "hint": "A queen check along the eighth rank forces the king up; find the next queen check.",
+    "explain": "Qa8 checks the king on g8 along the eighth rank, and Kg7 is the only reply. Qf8 is then mate: the queen gives check on the diagonal, the bishop on f5 covers g6 and h7, and the knight on d7 covers f6."
+  },
+  {
+    "id": "t-01",
+    "kind": "tactic",
+    "fen": "r4b1r/ppp1k2p/1n1Nppp1/3p3Q/3P4/P1PPP3/5PPP/R1B1K1R1 b Q - 0 14",
+    "solution": [
+      "g6h5"
+    ],
+    "line": [
+      "g6h5",
+      "d6b7",
+      "f8g7",
+      "b7c5"
+    ],
+    "theme": "tactic",
+    "hint": "A black pawn attacks a square where the white queen stands.",
+    "explain": "Gxh5 captures the white queen on h5 with the pawn from g6. No white piece protects h5, so White loses the queen for a pawn."
+  },
+  {
+    "id": "t-02",
+    "kind": "tactic",
+    "fen": "r1b1kb1r/p3ppp1/2pp3p/q2n4/4Q3/2N2N2/P1P1PPPP/R1B1KB1R b KQkq - 3 10",
+    "solution": [
+      "a5c3"
+    ],
+    "line": [
+      "a5c3",
+      "e1d1",
+      "c3a1",
+      "e4c4"
+    ],
+    "theme": "tactic",
+    "hint": "A black queen can grab an undefended knight and keep attacking from there.",
+    "explain": "Qxc3 takes the knight on c3, which nothing defends, and from c3 the queen also attacks the rook on a1 along the diagonal. White cannot save both pieces, so Black wins material."
+  },
+  {
+    "id": "t-03",
+    "kind": "tactic",
+    "fen": "r1b1kb1r/p3ppp1/2pp3p/8/1n1Q4/1N6/q1P1PPPP/2B1KB1R b Kkq - 3 14",
+    "solution": [
+      "b4c2"
+    ],
+    "line": [
+      "b4c2",
+      "e1d1",
+      "c2d4",
+      "b3d4"
+    ],
+    "theme": "fork",
+    "hint": "A knight can capture a pawn and attack two targets at once.",
+    "explain": "Nxc2 takes the pawn on c2 and forks the king on e1 with the queen on d4. The king has to step aside, so Black wins the queen."
+  },
+  {
+    "id": "t-04",
+    "kind": "tactic",
+    "fen": "2Qqkb1r/r2pppp1/1p3B1p/p2P4/8/2N1PP2/PPP1NP1P/1R2KB1R b Kk - 0 12",
+    "solution": [
+      "d8c8"
+    ],
+    "line": [
+      "d8c8",
+      "f6d4",
+      "c8c7",
+      "h1g1"
+    ],
+    "theme": "tactic",
+    "hint": "Find the capture on the back rank that removes an undefended queen.",
+    "explain": "Qxc8 takes the white queen on c8, and no white piece can recapture on that square. Black wins the queen for nothing."
+  },
+  {
+    "id": "t-05",
+    "kind": "tactic",
+    "fen": "1r2k1r1/6p1/7p/2B1p3/4P3/PRb1NP2/4NPBP/3R2K1 b - - 0 36",
+    "solution": [
+      "b8b3"
+    ],
+    "line": [
+      "b8b3",
+      "e2c3",
+      "b3c3",
+      "c5d6"
+    ],
+    "theme": "tactic",
+    "hint": "A black rook on the b-file can take a rook that nothing defends.",
+    "explain": "Rxb3 wins the white rook on b3, which nothing defends. After the knight recaptures on c3, the black rook takes it back, so Black ends up well ahead in material."
+  },
+  {
+    "id": "t-06",
+    "kind": "tactic",
+    "fen": "4k2r/ppr2pQ1/2p1p3/7p/Pn6/4qPP1/b1P1P3/3K1BR1 w k - 0 33",
+    "solution": [
+      "g7h8"
+    ],
+    "line": [
+      "g7h8",
+      "e8d7",
+      "g1g2",
+      "a2b1"
+    ],
+    "theme": "tactic",
+    "hint": "A queen can take a rook on the back rank and give check at the same time.",
+    "explain": "Qxh8 takes the black rook on h8 with check along the eighth rank, and the king on e8 is too far away to recapture. Black is simply down a rook."
+  },
+  {
+    "id": "t-07",
+    "kind": "tactic",
+    "fen": "1k3q2/1pp5/5pb1/1Pb5/p1PRpB1p/7P/K3PPP1/5B1R b - - 0 34",
+    "solution": [
+      "c5d4"
+    ],
+    "line": [
+      "c5d4",
+      "e2e3",
+      "d4b6",
+      "f1e2"
+    ],
+    "theme": "tactic",
+    "hint": "A bishop can take an undefended rook in the centre.",
+    "explain": "Bxd4 takes the white rook on d4, which nothing defends. After the pawn push e3 attacks the bishop, it simply retreats to b6, so Black keeps the extra rook."
+  },
+  {
+    "id": "t-08",
+    "kind": "tactic",
+    "fen": "r2nkbnr/1ppb1ppp/3p1q2/pN1P4/4Pp2/3Q1RPP/PPP1N1B1/R1B1K3 w Qkq - 0 14",
+    "solution": [
+      "b5c7"
+    ],
+    "line": [
+      "b5c7",
+      "e8e7",
+      "c7a8",
+      "f6e5"
+    ],
+    "theme": "fork",
+    "hint": "A knight can capture a pawn on the seventh rank and attack the king and a rook.",
+    "explain": "Nxc7 takes a pawn with a knight fork, hitting the black king on e8 and the rook on a8. After the king steps aside, Nxa8 wins the rook."
+  },
+  {
+    "id": "t-09",
+    "kind": "tactic",
+    "fen": "4r2k/2pr1p2/p2b4/P1p1pP1p/2Pp2q1/3P1NR1/2P2PP1/1R2Q1K1 w - - 5 41",
+    "solution": [
+      "g3g4"
+    ],
+    "line": [
+      "g3g4",
+      "h5g4",
+      "f3g5",
+      "e8g8"
+    ],
+    "theme": "tactic",
+    "hint": "A rook can capture the enemy queen, so check who can recapture.",
+    "explain": "Rxg4 captures the black queen on g4, which only the pawn on h5 defends. After hxg4 White has given a rook for a queen, so the trade wins material."
+  },
+  {
+    "id": "t-10",
+    "kind": "tactic",
+    "fen": "2r3k1/2p2p2/p2r1P2/P1p5/2Pp1P1Q/3P4/1R4P1/6K1 w - - 2 54",
+    "solution": [
+      "h4g4"
+    ],
+    "line": [
+      "h4g4",
+      "g8f8",
+      "g4c8",
+      "d6d8"
+    ],
+    "theme": "tactic",
+    "hint": "Look for a queen check on an open file that also leads to a rook.",
+    "explain": "Qg4 checks the black king on g8 down the open g-file. After the king steps to f8 the queen takes the undefended rook on c8."
+  }
+]

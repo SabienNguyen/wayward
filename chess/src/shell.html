@@ -1,0 +1,197 @@
+<title>Chess Dojo</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;500;700&family=Noto+Sans+Symbols+2&display=swap">
+<style>
+/*@@CSS@@*/
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <h1>Chess <span>Dojo</span></h1>
+      <p>Play friends online, Claude, or the computer at six levels, up to a strong engine. A Claude tutor, step-by-step lessons and tactics puzzles help you improve.</p>
+    </div>
+    <div class="controls">
+      <label for="mode">Play
+        <select id="mode">
+          <option value="ai">vs Computer</option>
+          <option value="claude">vs Claude</option>
+          <option value="pvp">Pass and play</option>
+          <option value="online">Online with people</option>
+        </select>
+      </label>
+      <label for="side">As
+        <select id="side"><option value="w">White</option><option value="b">Black</option><option value="r">Random</option></select>
+      </label>
+      <label for="level">Level <select id="level"></select></label>
+      <button class="btn primary" id="newBtn" type="button">New game</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <section class="play" aria-label="Board">
+      <div class="boardcol">
+        <div class="gamebar">
+          <span class="chip" id="modeChip">vs Computer</span>
+          <span class="gamebar-title" id="onlineGameBar" hidden><span id="onlineGameTitle"></span></span>
+          <span class="spacer"></span>
+          <button class="btn small" id="hintBtn" type="button">Hint</button>
+          <button class="btn small" id="undoBtn" type="button">Undo</button>
+          <button class="btn small" id="resignBtn" type="button" hidden>Resign</button>
+          <button class="btn small primary" id="returnBtn" type="button" hidden>Back to my game</button>
+        </div>
+        <div class="player" id="playerTop"></div>
+        <div class="board"><div class="grid" id="grid"></div></div>
+        <div class="player" id="playerBot"></div>
+        <div class="status">
+          <div class="turnline"><span class="msg" id="msg"></span><span class="eyebrow" id="moveNo"></span></div>
+          <div class="evalline" id="evalLine" hidden></div>
+          <div class="says" id="claudeSays" hidden><span class="says-who">Claude</span><span id="claudeSaysText"></span></div>
+          <div class="coach" id="coach"></div>
+          <div class="toggles"><label class="chk" for="showEval"><input type="checkbox" id="showEval"> Show evaluation</label></div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <div class="tabs" role="tablist">
+        <button role="tab" data-tab="tutor" aria-selected="true" type="button">Tutor</button>
+        <button role="tab" data-tab="online" aria-selected="false" type="button">Online</button>
+        <button role="tab" data-tab="puzzles" aria-selected="false" type="button">Puzzles</button>
+        <button role="tab" data-tab="lessons" aria-selected="false" type="button">Lessons</button>
+        <button role="tab" data-tab="pieces" aria-selected="false" type="button">Pieces</button>
+        <button role="tab" data-tab="rules" aria-selected="false" type="button">Rules</button>
+        <button role="tab" data-tab="moves" aria-selected="false" type="button">Moves</button>
+      </div>
+
+      <div class="tabpane" id="pane-tutor">
+        <h2>Your tutor</h2>
+        <p class="muted">Claude sees the board, the move list and the engine's analysis, and coaches you from there.</p>
+        <p class="note" id="tutorNoClaude" hidden>Claude isn't reachable from this view, so the tutor falls back to engine analysis. Allow this page to ask Claude (from its permissions) to get explanations.</p>
+        <div class="row-actions">
+          <button class="btn" type="button" id="tExplain">Explain this position</button>
+          <button class="btn" type="button" id="tMove">What should I play?</button>
+          <button class="btn primary" type="button" id="tReview">Review my game</button>
+        </div>
+        <div id="reviewOut"></div>
+        <div class="tutorlog" id="tutorLog" aria-live="polite"></div>
+        <form class="askrow" id="tutorForm">
+          <label class="sr" for="tutorInput">Ask the tutor</label>
+          <input id="tutorInput" type="text" placeholder="Ask anything, e.g. why is my bishop bad here?" autocomplete="off">
+          <button class="btn primary" type="submit" id="tutorAsk">Ask</button>
+          <button class="btn" type="button" id="tutorStop" hidden>Stop</button>
+        </form>
+        <div class="row-actions"><button class="linkbtn" type="button" id="tClear">Clear conversation</button></div>
+        <h3>Your progress</h3>
+        <div id="progress"></div>
+        <h3>Computer levels</h3>
+        <ul class="levels" id="levelList"></ul>
+      </div>
+
+      <div class="tabpane" id="pane-online" hidden>
+        <h2>Play people online</h2>
+        <div id="onlineOff" class="note">Online play needs you to be signed in to claude.ai with access to this page. Share the page with a friend from its Share menu so they can join.</div>
+        <div id="onlineOn" hidden>
+          <p class="muted">Create a game, then share this page. Anyone with access can take the open seat, and everyone else can watch live. You can also seat Claude as your opponent.</p>
+          <div class="create">
+            <label for="newTitle">Name<input id="newTitle" type="text" maxlength="60" placeholder="Friendly game"></label>
+            <label for="newSide">You play
+              <select id="newSide"><option value="white">White</option><option value="black">Black</option><option value="random">Random</option></select>
+            </label>
+            <label for="newOpp">Opponent
+              <select id="newOpp"><option value="anyone">Anyone who joins</option><option value="claude">Claude</option></select>
+            </label>
+            <button class="btn primary" type="button" id="createGame">Create game</button>
+          </div>
+          <p class="lobbymsg" id="lobbyMsg" role="status"></p>
+          <div id="lobbyLists"></div>
+        </div>
+      </div>
+
+      <div class="tabpane" id="pane-puzzles" hidden>
+        <h2>Puzzles</h2>
+        <p class="muted">Positions from real games where one move wins. Spotting these patterns is the fastest way to get better. <span id="puzzleProgress"></span></p>
+        <div class="row-actions" id="puzzleActions" hidden>
+          <button class="btn" type="button" id="puzzleRetry">Restart</button>
+          <button class="btn" type="button" id="puzzleShow">Show solution</button>
+          <button class="btn primary" type="button" id="puzzleNext">Next puzzle</button>
+        </div>
+        <div id="puzzleList"></div>
+      </div>
+
+      <div class="tabpane" id="pane-lessons" hidden><div id="lessonBody"></div></div>
+      <div class="tabpane" id="pane-pieces" hidden></div>
+
+      <div class="tabpane" id="pane-rules" hidden>
+        <h2>How chess works</h2>
+        <p>Two players, an 8×8 board, 16 pieces each. White moves first. You win by checkmating the enemy king: attacking it so that no move can save it.</p>
+        <details open><summary>1. The pieces</summary><div>
+          <p>Tap a piece to study how it moves.</p>
+          <div class="allpieces" id="allPieces"></div>
+        </div></details>
+        <details><summary>2. Check and checkmate</summary><div>
+          <ul>
+            <li>A king that is attacked is in <b>check</b>. You must get out of check at once: move the king, capture the attacker, or block the line.</li>
+            <li>You may never make a move that leaves your own king in check.</li>
+            <li>If you're in check and nothing gets you out, it's <b>checkmate</b> and the game is over.</li>
+          </ul>
+        </div></details>
+        <details><summary>3. Special moves</summary><div>
+          <ul>
+            <li><b>Castling:</b> the king moves two squares toward a rook, and the rook jumps to the other side of it. Allowed only if neither has moved, the squares between are empty, and the king isn't in check, doesn't pass through an attacked square, and doesn't land on one.</li>
+            <li><b>En passant:</b> if an enemy pawn moves two squares and lands beside your pawn, you may capture it as if it had moved one square, but only on the very next move.</li>
+            <li><b>Promotion:</b> a pawn reaching the last rank becomes a queen, rook, bishop or knight of your choice.</li>
+          </ul>
+        </div></details>
+        <details><summary>4. Draws</summary><div>
+          <ul>
+            <li><b>Stalemate:</b> the side to move has no legal move but isn't in check.</li>
+            <li><b>Threefold repetition:</b> the same position occurs three times.</li>
+            <li><b>Fifty-move rule:</b> fifty moves by each side with no capture and no pawn move.</li>
+            <li><b>Insufficient material:</b> neither side can possibly checkmate, for example king against king and bishop.</li>
+          </ul>
+        </div></details>
+        <details><summary>5. Notation</summary><div>
+          <p>Files are a–h from White's left, ranks 1–8 from White's side. A move is the piece letter (K Q R B N; none for pawns) plus the square: <span class="nt">Nf3</span>. <span class="nt">x</span> marks a capture (<span class="nt">exd5</span>), <span class="nt">+</span> check, <span class="nt">#</span> checkmate, <span class="nt">O-O</span> and <span class="nt">O-O-O</span> castling, <span class="nt">=Q</span> promotion.</p>
+        </div></details>
+      </div>
+
+      <div class="tabpane" id="pane-moves" hidden>
+        <h2>Game record</h2>
+        <ol class="log" id="log"></ol>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<div class="overlay" id="promoDlg" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="promoTitle">
+    <h2 id="promoTitle">Promote your pawn</h2>
+    <p>Your pawn reached the last rank. Pick what it becomes. A queen is usually best.</p>
+    <div class="choices" id="promoChoices"></div>
+  </div>
+</div>
+
+<div class="overlay" id="endDlg" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="endTitle">
+    <h2 id="endTitle"></h2>
+    <p id="endText"></p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn primary" id="endReview" type="button">Review with the tutor</button>
+      <button class="btn" id="endNew" type="button">New game</button>
+      <button class="btn" id="endUndo" type="button">Take back</button>
+      <button class="btn" id="endClose" type="button">Look at the board</button>
+    </div>
+  </div>
+</div>
+
+<script id="brainSrc" type="text/plain">/*@@BRAIN_SRC@@*/</script>
+<script>
+/*@@BRAIN@@*/
+/*@@ENGINE@@*/
+const LESSONS = /*@@LESSONS@@*/;
+const PUZZLES = /*@@PUZZLES@@*/;
+/*@@APP@@*/
+</script>
